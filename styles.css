@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Montserrat", sans-serif;
+}
+ul, ol {
+    list-style: none;
+}
+
+.body{
+    background-color: #f8f9fa;
+    color: #212529;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.header{
+    background-color: #343a40;
+    color: #343a40;
+    padding: 20px 0;
+}
+
+.container{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
