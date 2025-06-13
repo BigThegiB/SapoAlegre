@@ -1,9 +1,25 @@
+body {
+    overflow: hidden;
+    margin: 0;
+}
 .MapaCSS {
+    width: 100%;
+    height: 100%;
+
+}
+
+#TelaZoom {
     width: 100vw;
     height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
-    margin: 0;
-    display: auto;
+    transition: none;
+    overflow: hidden;
+}
+
+#TelaZoom.active{
+    transform-origin: var(--origemX) var(--origemY);
+    transform: scale(var(--quantidadeZoom))translate(var(--posicaoX), var(--posicaoY));
+    transition: transform 0.6s ease-in;
 }
