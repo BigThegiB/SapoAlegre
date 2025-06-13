@@ -21,5 +21,5 @@ body {
 #TelaZoom.active{
     transform-origin: var(--origemX) var(--origemY);
     transform: scale(var(--quantidadeZoom))translate(var(--posicaoX), var(--posicaoY));
-    transition: transform 0.6s ease-in;
+    transition: none;
 }
