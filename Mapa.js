@@ -35,10 +35,9 @@ function DesenharMapa() {
   MapDraw.draw(data, options);
   google.visualization.events.addListener(MapDraw, "select", ClickUser);
 
-  function ZoomMapa(XPorcentagem, YPorcentagem, qntZoom, resolucao, continenteID) { // Função para zoom
+  function ZoomMapa(XPorcentagem, YPorcentagem, qntZoom, resolucao, continenteID) { // Função para zoom, X e Y Porcentagem são pra onde o zoom vai, qntZoom é quanto zoom vai dar, resolucao é pra falar se são continentes ou subcontinentes, continenteID é o ID do continente que vai ser selecionado
     Zoom = true;
-
-    let X = window.innerWidth * XPorcentagem;
+    let X = window.innerWidth * XPorcentagem; 
     let Y = window.innerHeight * YPorcentagem;
 
     let MeioTelaX = window.innerWidth / 2;
@@ -95,3 +94,4 @@ function DesenharMapa() {
 // Adicionar: Botão de voltar (talvez um X no texto)
 // Adicionar: Caixa de texto sobre os sapos
 // Adicionar: Header
+// Notas: Pra mudar o zoom, só mudar XPorcentagem e YPorcentagem, e a quantidade de zoom
