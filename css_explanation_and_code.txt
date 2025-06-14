@@ -1,0 +1,323 @@
+# Explanation of stylesMapa.css
+
+This document breaks down the `stylesMapa.css` file, explaining each CSS rule and its purpose in styling your Leaflet map page.
+
+## General CSS Concepts
+
+*   **CSS (Cascading Style Sheets):** A language used to describe how HTML elements should be displayed. It controls layout, colors, fonts, and the overall visual appearance.
+*   **CSS Rules:** A CSS file consists of rules. Each rule has:
+    *   A **Selector**: Points to the HTML element(s) you want to style (e.g., `body`, `#app-header`, `.custom-marker-circle`).
+    *   A **Declaration Block**: Enclosed in curly braces `{}`, containing one or more declarations. Each declaration is a `property: value;` pair (e.g., `color: white;`).
+
+## Breakdown of `stylesMapa.css` Rules
+
+---
+**Selector: `body`**
+*   Targets the main `<body>` element of your HTML page.
+*   Properties:
+    *   `font-family: Arial, sans-serif;`: Sets the default font to Arial, falling back to a generic sans-serif font.
+    *   `margin: 0;`: Removes default browser margins around the page.
+    *   `padding: 0;`: Removes default browser padding inside the body.
+    *   `display: flex;`: Enables Flexbox layout for direct children of the body.
+    *   `flex-direction: column;`: Stacks the direct children vertically.
+    *   `height: 100vh;`: Makes the body take up the full height of the browser viewport.
+    *   `background-color: #f0f0f0;`: Sets a light gray background for the page.
+
+---
+**Selector: `#app-header`**
+*   Targets the HTML element with `id="app-header"`.
+*   Properties:
+    *   `background-color: #4CAF50;`: Sets a green background for the header.
+    *   `color: white;`: Sets the text color in the header to white.
+    *   `padding: 10px 20px;`: Adds 10px padding on top/bottom and 20px on left/right inside the header.
+    *   `text-align: center;`: Centers the text within the header.
+    *   `box-shadow: 0 2px 4px rgba(0,0,0,0.1);`: Adds a subtle shadow below the header.
+
+---
+**Selector: `#map-container`**
+*   Targets the element with `id="map-container"`, which holds the map.
+*   Properties:
+    *   `flex-grow: 1;`: Allows this container to expand and fill available vertical space (since `body` is a flex container with `flex-direction: column`).
+    *   `display: flex;`: Makes this container a flex container for its own children (the map itself).
+    *   `justify-content: center;`: Centers its children (the map) horizontally.
+    *   `align-items: center;`: Centers its children (the map) vertically.
+    *   `padding: 10px;`: Adds 10px of padding on all sides inside this container.
+    *   `position: relative;`: Establishes a positioning context, necessary for absolutely positioning child elements like the back button relative to this container.
+
+---
+**Selector: `#Mapa`**
+*   Targets the `div` with `id="Mapa"`, where Leaflet renders the map.
+*   Properties:
+    *   `width: 100%;`: Makes the map take up the full width of its parent (`#map-container`).
+    *   `height: 100%;`: Makes the map take up the full height of its parent (`#map-container`).
+    *   `border-radius: 8px;`: Rounds the corners of the map.
+    *   `box-shadow: 0 0 10px rgba(0,0,0,0.2);`: Adds a shadow effect around the map.
+
+---
+**Selector: `#info-box`**
+*   Targets the element with `id="info-box"`.
+*   Properties:
+    *   `background-color: white;`: Sets a white background for the info box.
+    *   `padding: 15px;`: Adds 15px of padding on all sides inside the info box.
+    *   `margin: 10px;`: Adds 10px of margin on all sides outside the info box, separating it from other elements.
+    *   `border-radius: 8px;`: Rounds the corners of the info box.
+    *   `box-shadow: 0 2px 4px rgba(0,0,0,0.1);`: Adds a subtle shadow.
+    *   `text-align: center;`: Centers the text content.
+    *   `min-height: 50px;`: Ensures the info box has a minimum height of 50px, even if empty.
+
+---
+**Selector: `#back-button`**
+*   Targets the element with `id="back-button"`.
+*   Properties:
+    *   `position: absolute;`: Removes the button from the normal document flow and positions it relative to its nearest positioned ancestor (which is `#map-container` because of `position: relative`).
+    *   `top: 20px;`: Positions the button 20px from the top edge of `#map-container`.
+    *   `left: 20px;`: Positions the button 20px from the left edge of `#map-container`.
+    *   `z-index: 1000;`: Ensures the button is displayed on top of other elements (like map tiles). Higher `z-index` values are stacked on top.
+    *   `padding: 10px 15px;`: Adds padding inside the button (10px top/bottom, 15px left/right).
+    *   `background-color: #f44336;`: Sets a red background color.
+    *   `color: white;`: Sets the text color to white.
+    *   `border: none;`: Removes any default border.
+    *   `border-radius: 5px;`: Rounds the button's corners.
+    *   `cursor: pointer;`: Changes the mouse cursor to a pointer (hand icon) when hovering over the button.
+    *   `font-size: 16px;`: Sets the text size on the button.
+    *   `box-shadow: 0 2px 4px rgba(0,0,0,0.2);`: Adds a shadow to the button.
+
+---
+**Selector: `#back-button:hover`**
+*   Targets the `#back-button` specifically when the mouse cursor is hovering over it (this is a "pseudo-class").
+*   Properties:
+    *   `background-color: #d32f2f;`: Changes the button's background to a darker red on hover, providing visual feedback.
+
+---
+**Selector: `.custom-marker-circle`**
+*   Targets HTML elements with `class="custom-marker-circle"`. This is used for the main `div` of your custom circular image markers. The `.` indicates a class selector.
+*   Properties:
+    *   `width: 40px !important;`: Sets the marker width to 40px.
+    *   `height: 40px !important;`: Sets the marker height to 40px.
+        *   The `!important` flag increases the specificity of this rule, ensuring it overrides other conflicting styles (e.g., default Leaflet styles). Use with caution.
+    *   `border-radius: 50% !important;`: Makes the 40x40px `div` a perfect circle.
+    *   `background-color: #ddd !important;`: Sets a light gray fallback background, visible if the image inside fails to load.
+    *   `display: flex !important;`: Makes the circle a flex container to easily center its content (the image).
+    *   `justify-content: center !important;`: Centers the image horizontally within the circle.
+    *   `align-items: center !important;`: Centers the image vertically within the circle.
+    *   `overflow: hidden !important;`: **Crucial property.** It clips any part of the child image that extends beyond the circle's boundaries, ensuring the image appears contained within the circular shape.
+    *   `border: 2px solid white !important;`: Adds a 2px solid white border around the marker.
+    *   `box-shadow: 0 0 5px rgba(0,0,0,0.3) !important;`: Adds a shadow effect around the marker.
+    *   `position: relative !important;`: Establishes a positioning context, useful if you ever need to add absolutely positioned elements inside the marker.
+
+---
+**Selector: `.custom-marker-circle .marker-image`**
+*   Targets elements with `class="marker-image"` that are *inside* an element with `class="custom-marker-circle"`. This styles the `<img>` tag within your custom marker.
+*   Properties:
+    *   `display: block !important;`: Ensures the image behaves as a block-level element for more predictable layout control.
+    *   `width: 100% !important;`: Makes the image fill the full width of its parent circle (40px).
+    *   `height: 100% !important;`: Makes the image fill the full height of its parent circle (40px).
+    *   `object-fit: cover !important;`: Scales the image to maintain its aspect ratio while filling the 40x40px circle. If the image's aspect ratio differs, it will be cropped to fit, not stretched or squashed.
+    *   `border-radius: 0 !important;`: Ensures the image itself is not rounded; the parent `.custom-marker-circle` with `overflow: hidden` handles the circular clipping.
+
+---
+**Selector: `.custom-div-icon`**
+*   Targets elements with `class="custom-div-icon"`. This is often the class Leaflet adds to the wrapper `div` it creates around your custom `L.divIcon` HTML. These styles reset Leaflet's defaults for that wrapper.
+*   Properties:
+    *   `background: transparent !important;`: Makes the wrapper's background transparent.
+    *   `border: none !important;`: Removes any border from the wrapper.
+    *   `padding: 0 !important;`: Removes any padding from the wrapper.
+    *   `margin: 0 !important;`: Removes any margin from the wrapper. This is important for Leaflet's internal positioning calculations for the icon and its popup.
+    *   `overflow: hidden !important;`: Ensures this wrapper also clips content if necessary.
+
+---
+**Selector: `.popup-content`**
+*   Targets elements with `class="popup-content"`, used for the container of your custom popup HTML.
+*   Properties:
+    *   `text-align: center;`: Centers text and inline/inline-block children within the popup.
+
+---
+**Selector: `.popup-content h4`**
+*   Targets `<h4>` headings inside `.popup-content`.
+*   Properties:
+    *   `margin-bottom: 5px;`: Adds a small space below the heading.
+
+---
+**Selector: `.popup-content img`**
+*   Targets `<img>` tags inside `.popup-content`.
+*   Properties:
+    *   `max-width: 120px;`: Limits image width to 120px.
+    *   `height: auto;`: Maintains aspect ratio by adjusting height automatically.
+    *   `border-radius: 4px;`: Slightly rounds image corners.
+    *   `margin-bottom: 5px;`: Adds a small space below the image.
+
+---
+**Selector: `.popup-content p`**
+*   Targets `<p>` (paragraph) tags inside `.popup-content`.
+*   Properties:
+    *   `font-size: 0.9em;`: Sets font size to 90% of the parent's font size.
+    *   `margin-bottom: 5px;`: Adds a small space below the paragraph.
+
+---
+**Selector: `.popup-content small`**
+*   Targets `<small>` tags inside `.popup-content`.
+*   Properties:
+    *   `font-size: 0.8em;`: Sets font size to 80% of the parent's font size.
+    *   `color: #555;`: Sets text color to dark gray.
+
+---
+**Selector: `.info-box-content`**
+*   Targets elements with `class="info-box-content"`, likely a wrapper inside `#info-box`.
+*   Properties:
+    *   `padding: 10px;`: Adds 10px padding inside this content area.
+
+---
+**Selector: `.info-box-content h4`**
+*   Targets `<h4>` headings inside `.info-box-content`.
+*   Properties:
+    *   `margin-top: 0;`: Removes default top margin from the heading.
+
+---
+**Selector: `.info-box-content img`**
+*   Targets `<img>` tags inside `.info-box-content`.
+*   Properties:
+    *   `max-width: 100px;`: Limits image width to 100px.
+    *   `height: auto;`: Maintains aspect ratio.
+    *   `border-radius: 4px;`: Slightly rounds image corners.
+    *   `margin-top: 5px;`: Adds space above the image.
+    *   `margin-bottom: 10px;`: Adds space below the image.
+
+---
+This covers all the current CSS rules in `stylesMapa.css`.
+
+===================================================
+Full content of c:\Users\Gib\Documents\GitHub\SapoAlegre\stylesMapa.css
+===================================================
+
+/* stylesMapa.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    background-color: #f0f0f0;
+}
+
+#app-header {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#map-container {
+    flex-grow: 1; /* Allows the map container to fill available vertical space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    position: relative; /* For positioning the back button absolutely within it */
+}
+
+#Mapa { /* The div where Leaflet renders the map */
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+#info-box {
+    background-color: white;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    min-height: 50px;
+}
+
+#back-button {
+    position: absolute; /* Positioned relative to #map-container */
+    top: 20px;
+    left: 20px;
+    z-index: 1000; /* Ensures it's above the map tiles */
+    padding: 10px 15px;
+    background-color: #f44336; /* Red */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#back-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
+/* Styles for custom divIcon markers (THE ACTUAL MARKER ON THE MAP) */
+.custom-marker-circle {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important; /* Makes it a circle */
+    background-color: #ddd !important; /* Fallback if image fails */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: hidden !important; /* CRUCIAL: Clips the image to the circle */
+    border: 2px solid white !important;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3) !important;
+    position: relative !important;
+}
+
+.custom-marker-circle .marker-image {
+    display: block !important;
+    width: 100% !important; /* Image fills the 40x40 circle */
+    height: 100% !important;
+    object-fit: cover !important; /* Scales image to cover, crops if needed */
+    border-radius: 0 !important;
+}
+
+/* Leaflet's wrapper for divIcon - make it transparent */
+.custom-div-icon {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Styling for the content INSIDE THE POPUP */
+.popup-content {
+    text-align: center;
+}
+.popup-content h4 {
+    margin-bottom: 5px;
+}
+.popup-content img { /* Image inside the popup */
+    max-width: 120px;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+.popup-content p {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+.popup-content small {
+    font-size: 0.8em;
+    color: #555;
+}
+
+/* Styling for the content INSIDE THE INFOBOX (bottom of screen) */
+.info-box-content {
+    padding: 10px;
+}
+.info-box-content h4 {
+    margin-top: 0;
+}
+.info-box-content img { /* Image inside the info-box */
+    max-width: 100px;
+    height: auto;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,358 @@
+# Explanation of Mapa.js (Leaflet Implementation)
+
+This document breaks down the `Mapa.js` file, explaining each part of the JavaScript code used to create and manage your Leaflet map with custom markers.
+
+## General JavaScript & Leaflet Concepts
+
+*   **JavaScript (JS):** A programming language that makes web pages interactive. In this case, it's used to control the Leaflet map.
+*   **Leaflet:** A popular open-source JavaScript library for mobile-friendly interactive maps.
+*   **DOM (Document Object Model):** A programming interface for HTML documents. JavaScript can interact with the DOM to change the structure, style, and content of a web page.
+*   **Event Listener:** A JavaScript mechanism that waits for a certain event to happen (like a click or the page finishing loading) and then executes a function.
+*   **Objects and Properties:** JavaScript uses objects to group related data and functions. For example, the `map` object has properties like its current zoom level and methods to change its view.
+*   **Arrays and Loops:** Arrays store lists of items. Loops (like `forEach`) are used to iterate over arrays and perform actions on each item.
+
+## Breakdown of `Mapa.js` Code
+
+---
+**`document.addEventListener('DOMContentLoaded', () => { ... });`**
+*   This is an event listener that waits for the entire HTML document to be fully loaded and parsed by the browser before running the code inside the curly braces `{...}`.
+*   This is important because the JavaScript code needs to interact with HTML elements (like the `div` for the map), and those elements must exist before the script tries to find them.
+
+---
+**Map Initialization and Setup**
+
+```javascript
+const map = L.map('Mapa').setView([0, 0], 2);
+const infoBox = document.getElementById('info-box');
+const backButton = document.getElementById('back-button');
+const originalView = { lat: 0, lng: 0, zoom: 2 };
+```
+*   `const map = L.map('Mapa').setView([0, 0], 2);`
+    *   `L.map('Mapa')`: This creates a new Leaflet map instance. The string `'Mapa'` tells Leaflet to render the map inside the HTML element that has `id="Mapa"`.
+    *   `.setView([0, 0], 2)`: This sets the initial view of the map.
+        *   `[0, 0]`: An array representing the latitude and longitude (0 latitude, 0 longitude - near the coast of Africa in the Atlantic Ocean).
+        *   `2`: The initial zoom level. Lower numbers mean zoomed out further.
+*   `const infoBox = document.getElementById('info-box');`: Gets a reference to the HTML element with `id="info-box"` and stores it in the `infoBox` variable. This allows the script to update its content.
+*   `const backButton = document.getElementById('back-button');`: Gets a reference to the HTML element with `id="back-button"`.
+*   `const originalView = { lat: 0, lng: 0, zoom: 2 };`: Stores the initial map view settings in an object. This is used by the "Back" button to reset the map.
+
+```javascript
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+```
+*   `L.tileLayer(...)`: This adds a tile layer to the map. Maps are typically made up of many small square images called "tiles".
+    *   `'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'`: This is the URL template for fetching map tiles from OpenStreetMap (a free, editable map of the world).
+        *   `{s}`: Subdomain (e.g., 'a', 'b', 'c') for load balancing.
+        *   `{z}`: Zoom level.
+        *   `{x}`: Tile X coordinate.
+        *   `{y}`: Tile Y coordinate.
+    *   `attribution: '...'`: This sets the attribution text that is displayed on the map (usually in a corner) to give credit to the map data provider.
+*   `.addTo(map)`: Adds this tile layer to the `map` instance created earlier.
+
+---
+**Continent and Marker Data**
+
+```javascript
+const continentsData = [
+    {
+        name: "Africa", id: "AF",
+        markers: [
+            { lat: 10, lng: 20, title: "African Frog Species 1", imagePath: "img/placeholder_frog.png", description: "A fascinating frog from central Africa." },
+            // ... more markers for Africa
+        ]
+    },
+    // ... data for other continents (Asia, Europe, North America, South America, Oceania)
+];
+```
+*   `const continentsData = [...]`: This defines an array of objects. Each object represents a continent.
+*   Each continent object has:
+    *   `name`: The full name of the continent (e.g., "Africa").
+    *   `id`: A short identifier for the continent (e.g., "AF").
+    *   `markers`: An array of marker objects. Each marker object defines a specific point on the map for that continent and contains:
+        *   `lat`: Latitude of the marker.
+        *   `lng`: Longitude of the marker.
+        *   `title`: A title for the marker (e.g., "African Frog Species 1"), used in popups and the info box.
+        *   `imagePath`: The path to the image file for this marker (e.g., `"img/placeholder_frog.png"`).
+        *   `description`: A short description for the marker.
+
+---
+**Adding Markers to the Map**
+
+```javascript
+continentsData.forEach(continent => {
+    continent.markers.forEach(markerData => {
+        // ... code to create and add each marker ...
+    });
+});
+```
+*   `continentsData.forEach(...)`: This loop iterates over each continent object in the `continentsData` array.
+*   `continent.markers.forEach(...)`: Inside the first loop, this nested loop iterates over each `markerData` object within the current `continent`'s `markers` array.
+
+**Inside the marker loop:**
+
+1.  **Creating Custom Icon HTML:**
+    ```javascript
+    const iconHtml = `
+        <div class="custom-marker-circle">
+            <img src="${markerData.imagePath}" alt="${markerData.title}" class="marker-image">
+        </div>`;
+    ```
+    *   This creates an HTML string for the custom marker. It's a `div` with the class `custom-marker-circle` (styled in your CSS to be a circle) containing an `img` tag.
+    *   `${markerData.imagePath}` and `${markerData.title}` are template literals that insert the actual image path and title from the `markerData` object into the HTML string.
+
+2.  **Creating Leaflet DivIcon:**
+    ```javascript
+    const customIcon = L.divIcon({
+        html: iconHtml, // The HTML string created above
+        className: 'custom-div-icon', // A class for Leaflet's wrapper div (styled in CSS)
+        iconSize: [40, 40],      // Width and height of the icon in pixels
+        iconAnchor: [20, 20],    // The point of the icon that corresponds to the marker's geographical location (center for a 40x40 icon)
+        popupAnchor: [0, -20]    // The point from which the popup should open, relative to the iconAnchor (0px horizontally, 20px above the anchor)
+    });
+    ```
+    *   `L.divIcon(...)`: This Leaflet function creates a lightweight icon that uses custom HTML (defined by the `html` property).
+    *   The properties `iconSize`, `iconAnchor`, and `popupAnchor` are crucial for correctly positioning the icon and its popup on the map.
+
+3.  **Creating and Adding the Marker:**
+    ```javascript
+    const marker = L.marker([markerData.lat, markerData.lng], { icon: customIcon }).addTo(map);
+    ```
+    *   `L.marker([markerData.lat, markerData.lng], { icon: customIcon })`: Creates a new Leaflet marker at the specified latitude and longitude, using the `customIcon` created above.
+    *   `.addTo(map)`: Adds this marker to the map.
+
+4.  **Creating Popup Content:**
+    ```javascript
+    const popupContent = `
+        <div class="popup-content">
+            <h4>${markerData.title}</h4>
+            <img src="${markerData.imagePath}" alt="${markerData.title}" style="width:100px; height:auto; margin-top:5px; border-radius:5px;">
+            <p>${markerData.description}</p>
+            <small>Continent: ${continent.name}</small><br>
+            <small>Coords: ${markerData.lat.toFixed(2)}, ${markerData.lng.toFixed(2)}</small>
+        </div>
+    `;
+    marker.bindPopup(popupContent);
+    ```
+    *   Similar to `iconHtml`, this creates an HTML string for the content that will appear in the popup when a marker is clicked.
+    *   It includes the marker's title, image, description, continent name, and coordinates.
+    *   `markerData.lat.toFixed(2)` formats the latitude to two decimal places.
+    *   `marker.bindPopup(popupContent)`: Attaches this HTML content as a popup to the `marker`.
+
+5.  **Marker Click Event for Info Box:**
+    ```javascript
+    marker.on('click', () => {
+        infoBox.innerHTML = `
+            <div class="info-box-content">
+                <h4>${markerData.title}</h4>
+                <img src="${markerData.imagePath}" alt="${markerData.title}" style="width:80px; height:auto; margin-top:5px; border-radius:5px;">
+                <p>${markerData.description}</p>
+                <p><b>Continent:</b> ${continent.name} (${continent.id})</p>
+                <p><b>Coordinates:</b> ${markerData.lat.toFixed(2)}, ${markerData.lng.toFixed(2)}</p>
+            </div>
+        `;
+    });
+    ```
+    *   `marker.on('click', () => { ... })`: This attaches an event listener to the `marker`. The function inside `() => { ... }` will run whenever the marker is clicked.
+    *   `infoBox.innerHTML = ...`: When a marker is clicked, this line updates the content of the `infoBox` (the `div` at the bottom of your page) with details about the clicked marker.
+
+---
+**Back Button Logic**
+
+1.  **Show/Hide Back Button Based on Map View:**
+    ```javascript
+    map.on('zoomend moveend', () => {
+        const currentZoom = map.getZoom();
+        const currentCenter = map.getCenter();
+        const latDiff = Math.abs(currentCenter.lat - originalView.lat);
+        const lngDiff = Math.abs(currentCenter.lng - originalView.lng);
+
+        if (currentZoom !== originalView.zoom || latDiff > 0.0001 || lngDiff > 0.0001) {
+            backButton.style.display = 'block'; // Show button
+        } else {
+            backButton.style.display = 'none';  // Hide button
+        }
+    });
+    ```
+    *   `map.on('zoomend moveend', () => { ... })`: Attaches an event listener to the map that triggers after the map has finished zooming (`zoomend`) or moving (`moveend`).
+    *   Inside the listener:
+        *   It gets the current zoom level and center coordinates of the map.
+        *   It compares these with the `originalView` (the initial map state).
+        *   `Math.abs(...) > 0.0001`: A small tolerance is used when comparing latitude and longitude because floating-point numbers can sometimes have tiny precision issues.
+        *   If the current view is different from the original view, it sets `backButton.style.display = 'block'`, making the button visible. Otherwise, it hides the button (`'none'`).
+
+2.  **Back Button Click Functionality:**
+    ```javascript
+    backButton.addEventListener('click', () => {
+        map.setView([originalView.lat, originalView.lng], originalView.zoom);
+        infoBox.innerHTML = '<p>Informações sobre a região selecionada aparecerão aqui.</p>';
+    });
+    ```
+    *   `backButton.addEventListener('click', () => { ... })`: Attaches an event listener to the `backButton`.
+    *   When the button is clicked:
+        *   `map.setView(...)`: Resets the map's view to the `originalView` coordinates and zoom level.
+        *   `infoBox.innerHTML = ...`: Resets the content of the info box to its default message.
+        *   The `zoomend`/`moveend` event listener (described above) will then automatically hide the back button because the view now matches the `originalView`.
+
+3.  **Initial Button State:**
+    ```javascript
+    if (map.getZoom() === originalView.zoom && map.getCenter().lat === originalView.lat && map.getCenter().lng === originalView.lng) {
+        backButton.style.display = 'none';
+    }
+    ```
+    *   This code runs once when the page loads. It checks if the initial map view (which might be set by Leaflet or a previous interaction if the page was reloaded) is already the `originalView`. If it is, the back button is hidden immediately.
+
+---
+**Removed Code (Comments)**
+
+```javascript
+// Old GeoJSON related code (style, getContinentColor, onEachFeature, zoomToFeature, fetch) is removed.
+// Old mousemove listener for mouseY is removed as it's not used in this version.
+```
+*   These are comments indicating that code related to a previous GeoJSON-based implementation (likely from when you were using Google GeoChart or an earlier Leaflet version with GeoJSON polygons) has been removed as it's no longer needed for the current marker-based map.
+
+This covers the entire `Mapa.js` file. It sets up the map, defines data for markers, creates and adds those markers with custom appearances and popups, and implements interactivity for the info box and back button.
+
+===================================================
+Full content of c:\Users\Gib\Documents\GitHub\SapoAlegre\Mapa.js
+===================================================
+
+// filepath: c:\Users\Gib\Documents\GitHub\SapoAlegre\Mapa.js
+// Mapa.js - Leaflet Implementation with Markers
+
+document.addEventListener('DOMContentLoaded', () => {
+    const map = L.map('Mapa').setView([0, 0], 2); // Initial view: center of the world, zoom level 2
+    const infoBox = document.getElementById('info-box');
+    const backButton = document.getElementById('back-button');
+    const originalView = { lat: 0, lng: 0, zoom: 2 };
+
+    // Add a tile layer (e.g., OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Define continent data with specific marker locations, titles, and image paths
+    const continentsData = [
+        {
+            name: "Africa", id: "AF",
+            markers: [
+                { lat: 10, lng: 20, title: "African Frog Species 1", imagePath: "img/placeholder_frog.png", description: "A fascinating frog from central Africa." },
+                { lat: 0, lng: 25, title: "Desert Froglet", imagePath: "img/placeholder_frog.png", description: "Found in arid regions of Africa." },
+                { lat: -15, lng: 30, title: "River Hopper", imagePath: "img/placeholder_frog.png", description: "Lives near African rivers." }
+            ]
+        },
+        {
+            name: "Asia", id: "AS",
+            markers: [
+                { lat: 40, lng: 90, title: "Mountain Leaper", imagePath: "img/placeholder_frog.png", description: "Inhabits high-altitude areas in Asia." },
+                { lat: 30, lng: 105, title: "Paddy Frog", imagePath: "img/placeholder_frog.png", description: "Common in Asian rice paddies." },
+                { lat: 20, lng: 80, title: "Jungle Croaker", imagePath: "img/placeholder_frog.png", description: "A vibrant frog from Asian jungles." }
+            ]
+        },
+        {
+            name: "Europe", id: "EU",
+            markers: [
+                { lat: 50, lng: 10, title: "Common European Frog", imagePath: "img/placeholder_frog.png", description: "Widespread across Europe." },
+                { lat: 45, lng: 20, title: "Forest Dweller Frog", imagePath: "img/placeholder_frog.png", description: "Prefers European woodlands." },
+                { lat: 55, lng: 0, title: "Moorland Frog", imagePath: "img/placeholder_frog.png", description: "Adapted to European moorlands." }
+            ]
+        },
+        {
+            name: "North America", id: "NA",
+            markers: [
+                { lat: 45, lng: -100, title: "Great Plains Toad", imagePath: "img/sapinho.jpg", description: "The special Sapinho frog!" }, // Using an existing image for one
+                { lat: 39, lng: -95, title: "Bullfrog", imagePath: "img/placeholder_frog.png", description: "A large North American frog." },
+                { lat: 55, lng: -110, title: "Boreal Chorus Frog", imagePath: "img/placeholder_frog.png", description: "Found in northern NA." }
+            ]
+        },
+        {
+            name: "South America", id: "SA",
+            markers: [
+                { lat: -10, lng: -60, title: "Amazon Dart Frog", imagePath: "img/blue_dart_frog.jpg", description: "A colorful poison dart frog." }, // UPDATED IMAGE PATH
+                { lat: -20, lng: -50, title: "Andean Water Frog", imagePath: "img/placeholder_frog.png", description: "Lives in the Andes mountains." },
+                { lat: 0, lng: -70, title: "Glass Frog", imagePath: "img/placeholder_frog.png", description: "Known for its translucent skin." }
+            ]
+        },
+        {
+            name: "Oceania", id: "OC",
+            markers: [
+                { lat: -25, lng: 135, title: "Green Tree Frog (AU)", imagePath: "img/placeholder_frog.png", description: "Common in Australia." },
+                { lat: -20, lng: 145, title: "Corroboree Frog", imagePath: "img/placeholder_frog.png", description: "A critically endangered Australian frog." },
+                { lat: -30, lng: 120, title: "Desert Tree Frog", imagePath: "img/placeholder_frog.png", description: "Adapted to arid parts of Oceania." }
+            ]
+        }
+    ];
+
+    // Add markers for each continent
+    continentsData.forEach(continent => {
+        continent.markers.forEach(markerData => {
+            const iconHtml = `
+                <div class="custom-marker-circle">
+                    <img src="${markerData.imagePath}" alt="${markerData.title}" class="marker-image">
+                </div>`;
+
+            const customIcon = L.divIcon({
+                html: iconHtml,
+                className: 'custom-div-icon', // Class for the divIcon wrapper
+                iconSize: [40, 40], // Size of the circle
+                iconAnchor: [20, 20], // Center of the circle
+                popupAnchor: [0, -20] // Popup above the circle
+            });
+
+            const marker = L.marker([markerData.lat, markerData.lng], { icon: customIcon }).addTo(map);
+
+            const popupContent = `
+                <div class="popup-content">
+                    <h4>${markerData.title}</h4>
+                    <img src="${markerData.imagePath}" alt="${markerData.title}" style="width:100px; height:auto; margin-top:5px; border-radius:5px;">
+                    <p>${markerData.description}</p>
+                    <small>Continent: ${continent.name}</small><br>
+                    <small>Coords: ${markerData.lat.toFixed(2)}, ${markerData.lng.toFixed(2)}</small>
+                </div>
+            `;
+            marker.bindPopup(popupContent);
+
+            marker.on('click', () => {
+                infoBox.innerHTML = `
+                    <div class="info-box-content">
+                        <h4>${markerData.title}</h4>
+                        <img src="${markerData.imagePath}" alt="${markerData.title}" style="width:80px; height:auto; margin-top:5px; border-radius:5px;">
+                        <p>${markerData.description}</p>
+                        <p><b>Continent:</b> ${continent.name} (${continent.id})</p>
+                        <p><b>Coordinates:</b> ${markerData.lat.toFixed(2)}, ${markerData.lng.toFixed(2)}</p>
+                    </div>
+                `;
+            });
+        });
+    });
+
+    // Show/hide back button based on map view changes
+    map.on('zoomend moveend', () => {
+        const currentZoom = map.getZoom();
+        const currentCenter = map.getCenter();
+        // A small tolerance for floating point comparisons of center
+        const latDiff = Math.abs(currentCenter.lat - originalView.lat);
+        const lngDiff = Math.abs(currentCenter.lng - originalView.lng);
+
+        if (currentZoom !== originalView.zoom || latDiff > 0.0001 || lngDiff > 0.0001) {
+            backButton.style.display = 'block';
+        } else {
+            backButton.style.display = 'none';
+        }
+    });
+
+    // Back button functionality
+    backButton.addEventListener('click', () => {
+        map.setView([originalView.lat, originalView.lng], originalView.zoom);
+        infoBox.innerHTML = '<p>Informações sobre a região selecionada aparecerão aqui.</p>';
+        // The zoomend/moveend event will hide the button
+    });
+
+    // Ensure button is hidden on initial load if view matches original
+    if (map.getZoom() === originalView.zoom && map.getCenter().lat === originalView.lat && map.getCenter().lng === originalView.lng) {
+        backButton.style.display = 'none';
+    }
+});
+
+// Old GeoJSON related code (style, getContinentColor, onEachFeature, zoomToFeature, fetch) is removed.
+// Old mousemove listener for mouseY is removed as it's not used in this version.

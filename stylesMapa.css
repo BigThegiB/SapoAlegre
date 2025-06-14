@@ -1,26 +1,132 @@
+/* stylesMapa.css */
 body {
-    overflow: hidden;
+    font-family: Arial, sans-serif;
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    background-color: #f0f0f0;
 }
-.MapaCSS {
+
+#app-header {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#map-container {
+    flex-grow: 1; /* Allows the map container to fill available vertical space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    position: relative; /* For positioning the back button absolutely within it */
+}
+
+#Mapa { /* The div where Leaflet renders the map */
     width: 100%;
     height: 100%;
-
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-#TelaZoom {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    transition: none;
-    overflow: hidden;
+#info-box {
+    background-color: white;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    min-height: 50px;
 }
 
-#TelaZoom.active{
-    transform-origin: var(--origemX) var(--origemY);
-    transform: scale(var(--quantidadeZoom))translate(var(--posicaoX), var(--posicaoY));
-    transition: transform 0.35s ease-in;
+#back-button {
+    position: absolute; /* Positioned relative to #map-container */
+    top: 20px;
+    left: 20px;
+    z-index: 1000; /* Ensures it's above the map tiles */
+    padding: 10px 15px;
+    background-color: #f44336; /* Red */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
+#back-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
+/* Styles for custom divIcon markers (THE ACTUAL MARKER ON THE MAP) */
+.custom-marker-circle {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important; /* Makes it a circle */
+    background-color: #ddd !important; /* Fallback if image fails */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: hidden !important; /* CRUCIAL: Clips the image to the circle */
+    border: 2px solid white !important;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3) !important;
+    position: relative !important;
+}
+
+.custom-marker-circle .marker-image {
+    display: block !important;
+    width: 100% !important; /* Image fills the 40x40 circle */
+    height: 100% !important;
+    object-fit: cover !important; /* Scales image to cover, crops if needed */
+    border-radius: 0 !important;
+}
+
+/* Leaflet's wrapper for divIcon - make it transparent */
+.custom-div-icon {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Styling for the content INSIDE THE POPUP */
+.popup-content {
+    text-align: center;
+}
+.popup-content h4 {
+    margin-bottom: 5px;
+}
+.popup-content img { /* Image inside the popup */
+    max-width: 120px;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+.popup-content p {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+.popup-content small {
+    font-size: 0.8em;
+    color: #555;
+}
+
+/* Styling for the content INSIDE THE INFOBOX (bottom of screen) */
+.info-box-content {
+    padding: 10px;
+}
+.info-box-content h4 {
+    margin-top: 0;
+}
+.info-box-content img { /* Image inside the info-box */
+    max-width: 100px;
+    height: auto;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
