@@ -1,26 +1,120 @@
+/* stylesMapa.css */
 body {
-    overflow: hidden;
+    font-family: Arial, sans-serif;
     margin: 0;
-}
-.MapaCSS {
-    width: 100%;
-    height: 100%;
-
-}
-
-#TelaZoom {
-    width: 100vw;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
     height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    transition: none;
-    overflow: hidden;
+    background-color: #f0f0f0;
 }
 
-#TelaZoom.active{
-    transform-origin: var(--origemX) var(--origemY);
-    transform: scale(var(--quantidadeZoom))translate(var(--posicaoX), var(--posicaoY));
-    transition: transform 0.35s ease-in;
+#app-header {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+#container-mapa {
+    flex-grow: 1; /* Preenche o resto todo da tela */
+    display: flex;
+    padding: 5px; /* Ver se preferem com ou sem */
+}
+
+#Mapa { /* The div where Leaflet renders the map */
+    width: 100%;
+    height: 100%; 
+    border-radius: 2px; /* Arredonda */
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+#caixa-info {
+    background-color: white;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    display:none
+}
+
+#btn-voltar {
+    position: absolute; /* Para escolher o lugar exato */
+    top: 20px;
+    left: 20px;
+    z-index: 1000; /* Deixa ele na frente de tudo B) */
+    padding: 10px 15px;
+    background-color: #f44336; /* Red */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#btn-voltar:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
+/* Styles for custom divIcon markers (THE ACTUAL MARKER ON THE MAP) */
+.marcador-mapa {
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box; /* Ensures width/height include border and padding */
+    border-radius: 50%; /* Makes it a circle */
+    background-color: #ddd; /* Fallback if image fails */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* CRUCIAL: Clips the image to the circle */
+    border: 2px solid white;
+   
+    position: relative;
+}
+
+.marcador-mapa .marker-image {
+    display: block;
+    width: 100%; /* Image fills the 40x40 circle */
+    height: 100%;
+}
+
+
+/* Styling for the content INSIDE THE POPUP */
+.conteudo-popup {
+    text-align: center;
+}
+.conteudo-popup h4 {
+    margin-bottom: 5px;
+}
+.conteudo-popup img { /* Image inside the popup */
+    max-width: 120px;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+.conteudo-popup p {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+.conteudo-popup small {
+    font-size: 0.8em;
+    color: #555;
+}
+
+/* Styling for the content INSIDE THE INFOBOX (bottom of screen) */
+.caixa-info-content {
+    padding: 10px;
+}
+.caixa-info-content h4 {
+    margin-top: 0;
+}
+.caixa-info-content img { /* Image inside the info-box */
+    max-width: 100px;
+    height: auto;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}

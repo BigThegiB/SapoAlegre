@@ -1,100 +1,154 @@
-google.charts.load("current", { packages: ["geochart"] });
-google.charts.setOnLoadCallback(DesenharMapa);
-const TelaZoom = document.getElementById("TelaZoom");
-let qntZoom = 1;
-let Zoom = false;
-let mouseY = 0;
+// Mapa.js - Leaflet Implementation with Markers
 
-document.addEventListener("mousemove", (TrackMovimento) => {
-  mouseY = TrackMovimento.clientY;
+document.addEventListener('DOMContentLoaded', () => {
+    const map = L.map('Mapa').setView([0, 0], 2); // Initial view: center of the world, zoom level 2
+    const infoBox = document.getElementById('caixa-info');
+    const backButton = document.getElementById('btn-voltar');
+    const originalView = { lat: 0, lng: 0, zoom: 2 };
+
+    // Add a tile layer (e.g., OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Define continent data with specific marker locations, titles, and image paths
+    const ContinenteDados = [
+        {
+            name: "África", id: "AF",
+            markers: [
+                { lat: 10, lng: 20, title: "African Frog Species 1", imagePath: "img/placeholder_frog.jpg", description: "A fascinating frog from central Africa." },
+                { lat: 0, lng: 25, title: "Desert Froglet", imagePath: "img/placeholder_frog.jpg", description: "Found in arid regions of Africa." },
+                { lat: -15, lng: 30, title: "River Hopper", imagePath: "img/placeholder_frog.jpg", description: "Lives near African rivers." }
+            ]
+        },
+        {
+            name: "Ásia", id: "AS",
+            markers: [
+                { lat: 40, lng: 90, title: "Mountain Leaper", imagePath: "img/placeholder_frog.jpg", description: "Inhabits high-altitude areas in Asia." },
+                { lat: 30, lng: 105, title: "Paddy Frog", imagePath: "img/placeholder_frog.jpg", description: "Common in Asian rice paddies." },
+                { lat: 20, lng: 80, title: "Jungle Croaker", imagePath: "img/placeholder_frog.jpg", description: "A vibrant frog from Asian jungles." }
+            ]
+        },
+        {
+            name: "Europa", id: "EU",
+            markers: [
+                { lat: 50, lng: 10, title: "Common European Frog", imagePath: "img/placeholder_frog.jpg", description: "Widespread across Europe." },
+                { lat: 45, lng: 20, title: "Forest Dweller Frog", imagePath: "img/placeholder_frog.jpg", description: "Prefers European woodlands." },
+                { lat: 55, lng: 0, title: "Moorland Frog", imagePath: "img/placeholder_frog.jpg", description: "Adapted to European moorlands." }
+            ]
+        },
+        {
+            name: "América do Norte", id: "NA",
+            markers: [
+                { lat: 45, lng: -100, title: "Great Plains Toad", imagePath: "img/sapinho.jpg", description: "The special Sapinho frog!" }, // Using an existing image for one
+                { lat: 39, lng: -95, title: "Bullfrog", imagePath: "img/placeholder_frog.jpg", description: "A large North American frog." },
+                { lat: 55, lng: -110, title: "Boreal Chorus Frog", imagePath: "img/placeholder_frog.jpg", description: "Found in northern NA." }
+            ]
+        },
+        {
+            name: "América Central", id: "CA",
+            markers: [
+                { lat: 15, lng: -90, title: "Sapo Dourado", imagePath: "img/placeholder_frog.jpg", description: "Um sapo icônico da América Central." },
+                { lat: 10, lng: -84, title: "Rã de Olhos Vermelhos", imagePath: "img/placeholder_frog.jpg", description: "Conhecida por seus olhos vibrantes." },
+                { lat: 12, lng: -88, title: "Sapo Comum da Floresta Tropical", imagePath: "img/placeholder_frog.jpg", description: "Encontrado em florestas tropicais da região." }
+            ]
+        },
+        {
+            name: "América do Sul", id: "SA",
+            markers: [
+                { lat: -10, lng: -60, title: "Amazon Dart Frog", imagePath: "img/rãdardovenenosoazul.jpg", description: "A colorful poison dart frog." }, // UPDATED IMAGE PATH
+                { lat: -20, lng: -50, title: "Andean Water Frog", imagePath: "img/placeholder_frog.jpg", description: "Lives in the Andes mountains." },
+                { lat: 0, lng: -70, title: "Glass Frog", imagePath: "img/placeholder_frog.jpg", description: "Known for its translucent skin." }
+            ]
+        },
+        {
+            name: "Oceania", id: "OC",
+            markers: [
+                { lat: -25, lng: 135, title: "Green Tree Frog (AU)", imagePath: "img/placeholder_frog.jpg", description: "Common in Australia." },
+                { lat: -20, lng: 145, title: "Corroboree Frog", imagePath: "img/placeholder_frog.jpg", description: "A critically endangered Australian frog." },
+                { lat: -30, lng: 120, title: "Desert Tree Frog", imagePath: "img/placeholder_frog.jpg", description: "Adapted to arid parts of Oceania." }
+            ]
+        }
+    ];
+
+    ContinenteDados.forEach(continente => { // for loop que passa por cada continente criando uma variavel
+        continente.markers.forEach(markerData => { // passa por cada marcador dentro do continente 
+            const iconHtml = `
+                <div class="marcador-mapa">
+                    <img src="${markerData.imagePath}" alt="${markerData.title}" class="marker-image">
+                </div>`;
+
+            const customIcon = L.divIcon({
+                html: iconHtml,
+                className: 'custom-div-icon', // Class for the divIcon wrapper
+                iconSize: [40, 40], // Size of the circle
+                iconAnchor: [20, 20], // Center of the circle
+                popupAnchor: [0, -20] // Popup above the circle
+            });
+
+            const marker = L.marker([markerData.lat, markerData.lng], { icon: customIcon }).addTo(map);
+
+            const popupContent = `
+                <div class="conteudo-popup">
+                    <h4>${markerData.title}</h4>
+                    <img src="${markerData.imagePath}" alt="${markerData.title}" style="width:100px; height:auto; margin-top:5px; border-radius:5px;">
+                    <p>${markerData.description}</p>
+                    <small>Continent: ${continente.name}</small><br>
+                    <small>Coords: ${markerData.lat.toFixed(2)}, ${markerData.lng.toFixed(2)}</small>
+                </div>
+            `;
+            marker.bindPopup(popupContent);
+
+            // Evento para mostrar informações na caixa de informações ao clicar no marcador
+            marker.on('click', () => {
+                    infoBox.innerHTML =`
+                    
+
+                    <div class="caixa-info-content">
+                        <h4>${markerData.title}</h4>
+                        <img src="${markerData.imagePath}" alt="${markerData.title}" style="width:80px; height:auto; margin-top:5px; border-radius:5px;">
+                        <p>${markerData.description}</p>
+                        <p><b>Continente:</b> ${continente.name}</p>
+                        <p><b>Coordinates:</b> ${markerData.lat.toFixed(2)}, ${markerData.lng.toFixed(2)}</p>
+                    </div>
+                `;
+               infoBox.style.display = 'block';  
+            });
+        });
+    });
+
+    // Show/hide back button based on map view changes
+    map.on('zoomend moveend', () => {
+        const currentZoom = map.getZoom();
+        const currentCenter = map.getCenter();
+        // A small tolerance for floating point comparisons of center
+        const latDiff = Math.abs(currentCenter.lat - originalView.lat);
+        const lngDiff = Math.abs(currentCenter.lng - originalView.lng);
+
+        if (currentZoom !== originalView.zoom || latDiff > 0.0001 || lngDiff > 0.0001) {
+            backButton.style.display = 'block';
+        } else {
+            backButton.style.display = 'none';
+        }
+         
+    });
+
+    // Back button functionality
+    backButton.addEventListener('click', () => { 
+        map.setView([originalView.lat, originalView.lng], originalView.zoom);
+        infoBox.innerHTML = '<p>Informações sobre a região selecionada aparecerão aqui.</p>';
+        // The zoomend/moveend event will hide the button
+        infoBox.style.display = 'none';
+
+    });
+
+    // Ensure button is hidden on initial load if view matches original
+    if (map.getZoom() === originalView.zoom && map.getCenter().lat === originalView.lat && map.getCenter().lng === originalView.lng) {
+        backButton.style.display = 'none';
+
+    }
 });
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
-function DesenharMapa() {
-  var data = google.visualization.arrayToDataTable([
-    ["Continente", "Sapos no Mundo"],
-    ["142", "Sapos na Ásia"],
-    ["150", "Sapos na Europa"],
-    ["002", "Sapos na África"],
-    ["019", "Sapos na América"],
-    ["009", "Sapos na Oceania"],
-    ["005", "Sapos na América do Sul"],
-    ["013", "Sapos na América Central"],
-    ["021", "Sapos na América do Norte"],
-  ]);
 
-  var options = {
-    resolution: "continents",
-    region: "world",
-  };
 
-  var MapDraw = new google.visualization.GeoChart(document.getElementById("Mapa"));
-  MapDraw.draw(data, options);
-  google.visualization.events.addListener(MapDraw, "select", ClickUser);
-
-  function ZoomMapa(XPorcentagem, YPorcentagem, qntZoom, resolucao, continenteID) { // Função para zoom, X e Y Porcentagem são pra onde o zoom vai, qntZoom é quanto zoom vai dar, resolucao é pra falar se são continentes ou subcontinentes, continenteID é o ID do continente que vai ser selecionado
-    Zoom = true;
-    let X = window.innerWidth * XPorcentagem; 
-    let Y = window.innerHeight * YPorcentagem;
-
-    let MeioTelaX = window.innerWidth / 2;
-    let MeioTelaY = window.innerHeight / 2;
-    let TranslateX = MeioTelaX - X;
-    let TranslateY = MeioTelaY - Y;
-    TelaZoom.style.setProperty("--quantidadeZoom", qntZoom);
-    TelaZoom.style.setProperty("--origemX", `${X}px`);
-    TelaZoom.style.setProperty("--origemY", `${Y}px`);
-    TelaZoom.style.setProperty("--posicaoX", `${TranslateX}px`);
-    TelaZoom.style.setProperty("--posicaoY", `${TranslateY}px`);
-
-    TelaZoom.classList.add("active");
-    sleep(300).then(() => {
-      TelaZoom.classList.remove("active");
-      options.resolution = resolucao;
-      options.region = continenteID;
-      MapDraw.draw(data, options); 
-      console.log(options.region);
-    });
-  }
-
-  function ClickUser() { // Lida com o click do usuario em cada continente
-    var Selecionado = MapDraw.getSelection();
-    var ValorSelecionado = data.getValue(Selecionado[0].row, 0);
-    if (!Zoom) {
-    switch (ValorSelecionado) {
-      
-      case "142": // Ásia
-        ZoomMapa(0.6, 0.53, 3, "continents", "142");
-        break;
-      case "150": // Europa
-        ZoomMapa(0.52, 0.49, 4, "continents", "150");
-
-        break;
-      case "002": // África
-        ZoomMapa(0.55, 0.67, 3, "continents", "002");
-        break;
-      case "019": // Américas
-        if (mouseY < window.innerHeight * 0.6) { // Check America do Norte
-          ZoomMapa(0.35, 0.4, 2, "subcontinents", "021");
-        } else if (mouseY < window.innerHeight * 0.7) {   // Check da America Central
-          ZoomMapa(0.38, 0.6, 2.5, "subcontinents", "013");
-        } else { // Check da America do Sul
-          ZoomMapa(0.4, 0.7, 3, "subcontinents", "005");
-        }
-        break;
-      case "009":// Oceania
-        ZoomMapa(0.7, 0.68, 3, "continents", "009");
-        break;
-    }}
-    if (Zoom){options.tooltip = { trigger: 'none' };}
-  }
-}
-
-// Para voltar: options.resolution = 'continents'   options.region = 'world';
-// Adicionar: Botão de voltar (talvez um X no texto)
-// Adicionar: Caixa de texto sobre os sapos
-// Adicionar: Header
-// Notas: Pra mudar o zoom, só mudar XPorcentagem e YPorcentagem, e a quantidade de zoom
