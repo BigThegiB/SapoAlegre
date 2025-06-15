@@ -93,7 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
             marker.bindPopup(popupContent);
 
             marker.on('click', () => {
-                infoBox.innerHTML = `
+                    infoBox.innerHTML =`
+                    
+
                     <div class="info-box-content">
                         <h4>${markerData.title}</h4>
                         <img src="${markerData.imagePath}" alt="${markerData.title}" style="width:80px; height:auto; margin-top:5px; border-radius:5px;">
@@ -102,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p><b>Coordinates:</b> ${markerData.lat.toFixed(2)}, ${markerData.lng.toFixed(2)}</p>
                     </div>
                 `;
+               infoBox.style.display = 'block';  
             });
         });
     });
@@ -119,20 +122,29 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             backButton.style.display = 'none';
         }
+         
     });
 
     // Back button functionality
-    backButton.addEventListener('click', () => {
+    backButton.addEventListener('click', () => { 
         map.setView([originalView.lat, originalView.lng], originalView.zoom);
         infoBox.innerHTML = '<p>Informações sobre a região selecionada aparecerão aqui.</p>';
         // The zoomend/moveend event will hide the button
+        infoBox.style.display = 'none';
+
     });
 
     // Ensure button is hidden on initial load if view matches original
     if (map.getZoom() === originalView.zoom && map.getCenter().lat === originalView.lat && map.getCenter().lng === originalView.lng) {
         backButton.style.display = 'none';
+
     }
 });
 
 // Old GeoJSON related code (style, getContinentColor, onEachFeature, zoomToFeature, fetch) is removed.
 // Old mousemove listener for mouseY is removed as it's not used in this version.
+
+
+
+
+
