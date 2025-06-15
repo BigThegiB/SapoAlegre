@@ -2,8 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const map = L.map('Mapa').setView([0, 0], 2); // Initial view: center of the world, zoom level 2
-    const infoBox = document.getElementById('info-box');
-    const backButton = document.getElementById('back-button');
+    const infoBox = document.getElementById('caixa-info');
+    const backButton = document.getElementById('btn-voltar');
     const originalView = { lat: 0, lng: 0, zoom: 2 };
 
     // Add a tile layer (e.g., OpenStreetMap)
@@ -12,62 +12,69 @@ document.addEventListener('DOMContentLoaded', () => {
     }).addTo(map);
 
     // Define continent data with specific marker locations, titles, and image paths
-    const continentsData = [
+    const ContinenteDados = [
         {
-            name: "Africa", id: "AF",
+            name: "África", id: "AF",
             markers: [
-                { lat: 10, lng: 20, title: "African Frog Species 1", imagePath: "img/placeholder_frog.png", description: "A fascinating frog from central Africa." },
-                { lat: 0, lng: 25, title: "Desert Froglet", imagePath: "img/placeholder_frog.png", description: "Found in arid regions of Africa." },
-                { lat: -15, lng: 30, title: "River Hopper", imagePath: "img/placeholder_frog.png", description: "Lives near African rivers." }
+                { lat: 10, lng: 20, title: "African Frog Species 1", imagePath: "img/placeholder_frog.jpg", description: "A fascinating frog from central Africa." },
+                { lat: 0, lng: 25, title: "Desert Froglet", imagePath: "img/placeholder_frog.jpg", description: "Found in arid regions of Africa." },
+                { lat: -15, lng: 30, title: "River Hopper", imagePath: "img/placeholder_frog.jpg", description: "Lives near African rivers." }
             ]
         },
         {
-            name: "Asia", id: "AS",
+            name: "Ásia", id: "AS",
             markers: [
-                { lat: 40, lng: 90, title: "Mountain Leaper", imagePath: "img/placeholder_frog.png", description: "Inhabits high-altitude areas in Asia." },
-                { lat: 30, lng: 105, title: "Paddy Frog", imagePath: "img/placeholder_frog.png", description: "Common in Asian rice paddies." },
-                { lat: 20, lng: 80, title: "Jungle Croaker", imagePath: "img/placeholder_frog.png", description: "A vibrant frog from Asian jungles." }
+                { lat: 40, lng: 90, title: "Mountain Leaper", imagePath: "img/placeholder_frog.jpg", description: "Inhabits high-altitude areas in Asia." },
+                { lat: 30, lng: 105, title: "Paddy Frog", imagePath: "img/placeholder_frog.jpg", description: "Common in Asian rice paddies." },
+                { lat: 20, lng: 80, title: "Jungle Croaker", imagePath: "img/placeholder_frog.jpg", description: "A vibrant frog from Asian jungles." }
             ]
         },
         {
-            name: "Europe", id: "EU",
+            name: "Europa", id: "EU",
             markers: [
-                { lat: 50, lng: 10, title: "Common European Frog", imagePath: "img/placeholder_frog.png", description: "Widespread across Europe." },
-                { lat: 45, lng: 20, title: "Forest Dweller Frog", imagePath: "img/placeholder_frog.png", description: "Prefers European woodlands." },
-                { lat: 55, lng: 0, title: "Moorland Frog", imagePath: "img/placeholder_frog.png", description: "Adapted to European moorlands." }
+                { lat: 50, lng: 10, title: "Common European Frog", imagePath: "img/placeholder_frog.jpg", description: "Widespread across Europe." },
+                { lat: 45, lng: 20, title: "Forest Dweller Frog", imagePath: "img/placeholder_frog.jpg", description: "Prefers European woodlands." },
+                { lat: 55, lng: 0, title: "Moorland Frog", imagePath: "img/placeholder_frog.jpg", description: "Adapted to European moorlands." }
             ]
         },
         {
-            name: "North America", id: "NA",
+            name: "América do Norte", id: "NA",
             markers: [
                 { lat: 45, lng: -100, title: "Great Plains Toad", imagePath: "img/sapinho.jpg", description: "The special Sapinho frog!" }, // Using an existing image for one
-                { lat: 39, lng: -95, title: "Bullfrog", imagePath: "img/placeholder_frog.png", description: "A large North American frog." },
-                { lat: 55, lng: -110, title: "Boreal Chorus Frog", imagePath: "img/placeholder_frog.png", description: "Found in northern NA." }
+                { lat: 39, lng: -95, title: "Bullfrog", imagePath: "img/placeholder_frog.jpg", description: "A large North American frog." },
+                { lat: 55, lng: -110, title: "Boreal Chorus Frog", imagePath: "img/placeholder_frog.jpg", description: "Found in northern NA." }
             ]
         },
         {
-            name: "South America", id: "SA",
+            name: "América Central", id: "CA",
             markers: [
-                { lat: -10, lng: -60, title: "Amazon Dart Frog", imagePath: "img/blue_dart_frog.jpg", description: "A colorful poison dart frog." }, // UPDATED IMAGE PATH
-                { lat: -20, lng: -50, title: "Andean Water Frog", imagePath: "img/placeholder_frog.png", description: "Lives in the Andes mountains." },
-                { lat: 0, lng: -70, title: "Glass Frog", imagePath: "img/placeholder_frog.png", description: "Known for its translucent skin." }
+                { lat: 15, lng: -90, title: "Sapo Dourado", imagePath: "img/placeholder_frog.jpg", description: "Um sapo icônico da América Central." },
+                { lat: 10, lng: -84, title: "Rã de Olhos Vermelhos", imagePath: "img/placeholder_frog.jpg", description: "Conhecida por seus olhos vibrantes." },
+                { lat: 12, lng: -88, title: "Sapo Comum da Floresta Tropical", imagePath: "img/placeholder_frog.jpg", description: "Encontrado em florestas tropicais da região." }
+            ]
+        },
+        {
+            name: "América do Sul", id: "SA",
+            markers: [
+                { lat: -10, lng: -60, title: "Amazon Dart Frog", imagePath: "img/rãdardovenenosoazul.jpg", description: "A colorful poison dart frog." }, // UPDATED IMAGE PATH
+                { lat: -20, lng: -50, title: "Andean Water Frog", imagePath: "img/placeholder_frog.jpg", description: "Lives in the Andes mountains." },
+                { lat: 0, lng: -70, title: "Glass Frog", imagePath: "img/placeholder_frog.jpg", description: "Known for its translucent skin." }
             ]
         },
         {
             name: "Oceania", id: "OC",
             markers: [
-                { lat: -25, lng: 135, title: "Green Tree Frog (AU)", imagePath: "img/placeholder_frog.png", description: "Common in Australia." },
-                { lat: -20, lng: 145, title: "Corroboree Frog", imagePath: "img/placeholder_frog.png", description: "A critically endangered Australian frog." },
-                { lat: -30, lng: 120, title: "Desert Tree Frog", imagePath: "img/placeholder_frog.png", description: "Adapted to arid parts of Oceania." }
+                { lat: -25, lng: 135, title: "Green Tree Frog (AU)", imagePath: "img/placeholder_frog.jpg", description: "Common in Australia." },
+                { lat: -20, lng: 145, title: "Corroboree Frog", imagePath: "img/placeholder_frog.jpg", description: "A critically endangered Australian frog." },
+                { lat: -30, lng: 120, title: "Desert Tree Frog", imagePath: "img/placeholder_frog.jpg", description: "Adapted to arid parts of Oceania." }
             ]
         }
     ];
 
-    // Add markers for each continent
-    continentsData.forEach(continent => {
-        continent.markers.forEach(markerData => {
+    ContinenteDados.forEach(continente => { // for loop que passa por cada continente criando uma variavel
+        continente.markers.forEach(markerData => { // passa por cada marcador dentro do continente 
             const iconHtml = `
-                <div class="custom-marker-circle">
+                <div class="marcador-mapa">
                     <img src="${markerData.imagePath}" alt="${markerData.title}" class="marker-image">
                 </div>`;
 
@@ -82,25 +89,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const marker = L.marker([markerData.lat, markerData.lng], { icon: customIcon }).addTo(map);
 
             const popupContent = `
-                <div class="popup-content">
+                <div class="conteudo-popup">
                     <h4>${markerData.title}</h4>
                     <img src="${markerData.imagePath}" alt="${markerData.title}" style="width:100px; height:auto; margin-top:5px; border-radius:5px;">
                     <p>${markerData.description}</p>
-                    <small>Continent: ${continent.name}</small><br>
+                    <small>Continent: ${continente.name}</small><br>
                     <small>Coords: ${markerData.lat.toFixed(2)}, ${markerData.lng.toFixed(2)}</small>
                 </div>
             `;
             marker.bindPopup(popupContent);
 
+            // Evento para mostrar informações na caixa de informações ao clicar no marcador
             marker.on('click', () => {
                     infoBox.innerHTML =`
                     
 
-                    <div class="info-box-content">
+                    <div class="caixa-info-content">
                         <h4>${markerData.title}</h4>
                         <img src="${markerData.imagePath}" alt="${markerData.title}" style="width:80px; height:auto; margin-top:5px; border-radius:5px;">
                         <p>${markerData.description}</p>
-                        <p><b>Continent:</b> ${continent.name} (${continent.id})</p>
+                        <p><b>Continente:</b> ${continente.name}</p>
                         <p><b>Coordinates:</b> ${markerData.lat.toFixed(2)}, ${markerData.lng.toFixed(2)}</p>
                     </div>
                 `;
@@ -140,10 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 });
-
-// Old GeoJSON related code (style, getContinentColor, onEachFeature, zoomToFeature, fetch) is removed.
-// Old mousemove listener for mouseY is removed as it's not used in this version.
-
 
 
 

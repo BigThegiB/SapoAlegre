@@ -34,14 +34,12 @@ This document breaks down the `stylesMapa.css` file, explaining each CSS rule an
     *   `box-shadow: 0 2px 4px rgba(0,0,0,0.1);`: Adds a subtle shadow below the header.
 
 ---
-**Selector: `#map-container`**
-*   Targets the element with `id="map-container"`, which holds the map.
+**Selector: `#container-mapa`**
+*   Targets the element with `id="container-mapa"`, which holds the map.
 *   Properties:
     *   `flex-grow: 1;`: Allows this container to expand and fill available vertical space (since `body` is a flex container with `flex-direction: column`).
     *   `display: flex;`: Makes this container a flex container for its own children (the map itself).
-    *   `justify-content: center;`: Centers its children (the map) horizontally.
-    *   `align-items: center;`: Centers its children (the map) vertically.
-    *   `padding: 10px;`: Adds 10px of padding on all sides inside this container.
+    *   `padding: 5px;`: Adds 5px of padding on all sides inside this container.
     *   `position: relative;`: Establishes a positioning context, necessary for absolutely positioning child elements like the back button relative to this container.
 
 ---
@@ -50,12 +48,12 @@ This document breaks down the `stylesMapa.css` file, explaining each CSS rule an
 *   Properties:
     *   `width: 100%;`: Makes the map take up the full width of its parent (`#map-container`).
     *   `height: 100%;`: Makes the map take up the full height of its parent (`#map-container`).
-    *   `border-radius: 8px;`: Rounds the corners of the map.
+    *   `border-radius: 2px;`: Rounds the corners of the map.
     *   `box-shadow: 0 0 10px rgba(0,0,0,0.2);`: Adds a shadow effect around the map.
 
 ---
-**Selector: `#info-box`**
-*   Targets the element with `id="info-box"`.
+**Selector: `#caixa-info`**
+*   Targets the element with `id="caixa-info"`.
 *   Properties:
     *   `background-color: white;`: Sets a white background for the info box.
     *   `padding: 15px;`: Adds 15px of padding on all sides inside the info box.
@@ -63,15 +61,15 @@ This document breaks down the `stylesMapa.css` file, explaining each CSS rule an
     *   `border-radius: 8px;`: Rounds the corners of the info box.
     *   `box-shadow: 0 2px 4px rgba(0,0,0,0.1);`: Adds a subtle shadow.
     *   `text-align: center;`: Centers the text content.
-    *   `min-height: 50px;`: Ensures the info box has a minimum height of 50px, even if empty.
+    *   `display:none`: Initially hides the info box.
 
 ---
-**Selector: `#back-button`**
-*   Targets the element with `id="back-button"`.
+**Selector: `#btn-voltar`**
+*   Targets the element with `id="btn-voltar"`.
 *   Properties:
-    *   `position: absolute;`: Removes the button from the normal document flow and positions it relative to its nearest positioned ancestor (which is `#map-container` because of `position: relative`).
-    *   `top: 20px;`: Positions the button 20px from the top edge of `#map-container`.
-    *   `left: 20px;`: Positions the button 20px from the left edge of `#map-container`.
+    *   `position: absolute;`: Removes the button from the normal document flow and positions it relative to its nearest positioned ancestor (which is `#container-mapa` because of `position: relative`).
+    *   `top: 20px;`: Positions the button 20px from the top edge of `#container-mapa`.
+    *   `left: 20px;`: Positions the button 20px from the left edge of `#container-mapa`.
     *   `z-index: 1000;`: Ensures the button is displayed on top of other elements (like map tiles). Higher `z-index` values are stacked on top.
     *   `padding: 10px 15px;`: Adds padding inside the button (10px top/bottom, 15px left/right).
     *   `background-color: #f44336;`: Sets a red background color.
@@ -83,47 +81,46 @@ This document breaks down the `stylesMapa.css` file, explaining each CSS rule an
     *   `box-shadow: 0 2px 4px rgba(0,0,0,0.2);`: Adds a shadow to the button.
 
 ---
-**Selector: `#back-button:hover`**
-*   Targets the `#back-button` specifically when the mouse cursor is hovering over it (this is a "pseudo-class").
+**Selector: `#btn-voltar:hover`**
+*   Targets the `#btn-voltar` specifically when the mouse cursor is hovering over it (this is a "pseudo-class").
 *   Properties:
     *   `background-color: #d32f2f;`: Changes the button's background to a darker red on hover, providing visual feedback.
 
 ---
-**Selector: `.custom-marker-circle`**
-*   Targets HTML elements with `class="custom-marker-circle"`. This is used for the main `div` of your custom circular image markers. The `.` indicates a class selector.
+**Selector: `.marcador-mapa`**
+*   Targets HTML elements with `class="marcador-mapa"`. This is used for the main `div` of your custom circular image markers. The `.` indicates a class selector.
 *   Properties:
-    *   `width: 40px !important;`: Sets the marker width to 40px.
-    *   `height: 40px !important;`: Sets the marker height to 40px.
-        *   The `!important` flag increases the specificity of this rule, ensuring it overrides other conflicting styles (e.g., default Leaflet styles). Use with caution.
-    *   `border-radius: 50% !important;`: Makes the 40x40px `div` a perfect circle.
-    *   `background-color: #ddd !important;`: Sets a light gray fallback background, visible if the image inside fails to load.
-    *   `display: flex !important;`: Makes the circle a flex container to easily center its content (the image).
-    *   `justify-content: center !important;`: Centers the image horizontally within the circle.
-    *   `align-items: center !important;`: Centers the image vertically within the circle.
-    *   `overflow: hidden !important;`: **Crucial property.** It clips any part of the child image that extends beyond the circle's boundaries, ensuring the image appears contained within the circular shape.
-    *   `border: 2px solid white !important;`: Adds a 2px solid white border around the marker.
-    *   `box-shadow: 0 0 5px rgba(0,0,0,0.3) !important;`: Adds a shadow effect around the marker.
-    *   `position: relative !important;`: Establishes a positioning context, useful if you ever need to add absolutely positioned elements inside the marker.
+    *   `width: 40px;`: Sets the marker width to 40px.
+    *   `height: 40px;`: Sets the marker height to 40px.
+    *   `box-sizing: border-box;`: Ensures that the `width` and `height` properties include content, padding, and border, but not the margin.
+    *   `border-radius: 50%;`: Makes the 40x40px `div` a perfect circle.
+    *   `background-color: #ddd;`: Sets a light gray fallback background, visible if the image inside fails to load.
+    *   `display: flex;`: Makes the circle a flex container to easily center its content (the image).
+    *   `justify-content: center;`: Centers the image horizontally within the circle.
+    *   `align-items: center;`: Centers the image vertically within the circle.
+    *   `overflow: hidden;`: **Crucial property.** It clips any part of the child image that extends beyond the circle's boundaries, ensuring the image appears contained within the circular shape.
+    *   `border: 2px solid white;`: Adds a 2px solid white border around the marker.
+    *   `position: relative;`: Establishes a positioning context, useful if you ever need to add absolutely positioned elements inside the marker.
 
 ---
-**Selector: `.custom-marker-circle .marker-image`**
-*   Targets elements with `class="marker-image"` that are *inside* an element with `class="custom-marker-circle"`. This styles the `<img>` tag within your custom marker.
+**Selector: `.marcador-mapa .marker-image`**
+*   Targets elements with `class="marker-image"` that are *inside* an element with `class="marcador-mapa"`. This styles the `<img>` tag within your custom marker.
 *   Properties:
-    *   `display: block !important;`: Ensures the image behaves as a block-level element for more predictable layout control.
-    *   `width: 100% !important;`: Makes the image fill the full width of its parent circle (40px).
-    *   `height: 100% !important;`: Makes the image fill the full height of its parent circle (40px).
-    *   `object-fit: cover !important;`: Scales the image to maintain its aspect ratio while filling the 40x40px circle. If the image's aspect ratio differs, it will be cropped to fit, not stretched or squashed.
-    *   `border-radius: 0 !important;`: Ensures the image itself is not rounded; the parent `.custom-marker-circle` with `overflow: hidden` handles the circular clipping.
+    *   `display: block;`: Ensures the image behaves as a block-level element for more predictable layout control.
+    *   `width: 100%;`: Makes the image fill the full width of its parent circle (40px).
+    *   `height: 100%;`: Makes the image fill the full height of its parent circle (40px).
+    *   `object-fit: cover;`: Scales the image to maintain its aspect ratio while filling the 40x40px circle. If the image's aspect ratio differs, it will be cropped to fit, not stretched or squashed.
+    *   `border-radius: 0;`: Ensures the image itself is not rounded; the parent `.marcador-mapa` with `overflow: hidden` handles the circular clipping.
 
 ---
 **Selector: `.custom-div-icon`**
 *   Targets elements with `class="custom-div-icon"`. This is often the class Leaflet adds to the wrapper `div` it creates around your custom `L.divIcon` HTML. These styles reset Leaflet's defaults for that wrapper.
 *   Properties:
-    *   `background: transparent !important;`: Makes the wrapper's background transparent.
-    *   `border: none !important;`: Removes any border from the wrapper.
-    *   `padding: 0 !important;`: Removes any padding from the wrapper.
-    *   `margin: 0 !important;`: Removes any margin from the wrapper. This is important for Leaflet's internal positioning calculations for the icon and its popup.
-    *   `overflow: hidden !important;`: Ensures this wrapper also clips content if necessary.
+    *   `background: transparent;`: Makes the wrapper's background transparent.
+    *   `border: none;`: Removes any border from the wrapper.
+    *   `padding: 0;`: Removes any padding from the wrapper.
+    *   `margin: 0;`: Removes any margin from the wrapper. This is important for Leaflet's internal positioning calculations for the icon and its popup.
+    *   `overflow: hidden;`: Ensures this wrapper also clips content if necessary.
 
 ---
 **Selector: `.popup-content`**
@@ -208,36 +205,34 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-#map-container {
+#container-mapa {
     flex-grow: 1; /* Allows the map container to fill available vertical space */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
+    padding: 5px; /* Adjusted from 10px */
     position: relative; /* For positioning the back button absolutely within it */
 }
 
 #Mapa { /* The div where Leaflet renders the map */
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    border-radius: 2px; /* Adjusted from 8px */
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-#info-box {
+#caixa-info {
     background-color: white;
     padding: 15px;
     margin: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     text-align: center;
-    min-height: 50px;
+    display:none; /* Added to initially hide it */
 }
 
-#back-button {
-    position: absolute; /* Positioned relative to #map-container */
-    top: 20px;
-    left: 20px;
+#btn-voltar {
+    position: absolute; /* Positioned relative to #container-mapa */
+    top: 20px; /* Adjusted from 20px (relative to map-container padding) */
+    left: 20px; /* Adjusted from 20px (relative to map-container padding) */
     z-index: 1000; /* Ensures it's above the map tiles */
     padding: 10px 15px;
     background-color: #f44336; /* Red */
@@ -249,72 +244,73 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-#back-button:hover {
+#btn-voltar:hover {
     background-color: #d32f2f; /* Darker red on hover */
 }
 
 /* Styles for custom divIcon markers (THE ACTUAL MARKER ON THE MAP) */
-.custom-marker-circle {
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 50% !important; /* Makes it a circle */
-    background-color: #ddd !important; /* Fallback if image fails */
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    overflow: hidden !important; /* CRUCIAL: Clips the image to the circle */
-    border: 2px solid white !important;
-    box-shadow: 0 0 5px rgba(0,0,0,0.3) !important;
-    position: relative !important;
+.marcador-mapa {
+    width: 40px; /* Removed !important */
+    height: 40px; /* Removed !important */
+    box-sizing: border-box; /* ADDED */
+    border-radius: 50%; /* Makes it a circle, removed !important */
+    background-color: #ddd; /* Fallback if image fails, removed !important */
+    display: flex; /* Removed !important */
+    justify-content: center; /* Removed !important */
+    align-items: center; /* Removed !important */
+    overflow: hidden; /* CRUCIAL: Clips the image to the circle, removed !important */
+    border: 2px solid white; /* Removed !important */
+    /* box-shadow: 0 0 5px rgba(0,0,0,0.3) !important; */ /* Commented out or removed */
+    position: relative; /* Removed !important */
 }
 
-.custom-marker-circle .marker-image {
-    display: block !important;
-    width: 100% !important; /* Image fills the 40x40 circle */
-    height: 100% !important;
-    object-fit: cover !important; /* Scales image to cover, crops if needed */
-    border-radius: 0 !important;
+.marcador-mapa .marker-image {
+    display: block; /* Removed !important */
+    width: 100%; /* Image fills the 40x40 circle, removed !important */
+    height: 100%; /* Removed !important */
+    object-fit: cover; /* Scales image to cover, crops if needed, removed !important */
+    border-radius: 0; /* Removed !important */
 }
 
 /* Leaflet's wrapper for divIcon - make it transparent */
 .custom-div-icon {
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: hidden !important;
+    background: transparent; /* Removed !important */
+    border: none; /* Removed !important */
+    padding: 0; /* Removed !important */
+    margin: 0; /* Removed !important */
+    overflow: hidden; /* Removed !important */
 }
 
 /* Styling for the content INSIDE THE POPUP */
-.popup-content {
+.conteudo-popup {
     text-align: center;
 }
-.popup-content h4 {
+.conteudo-popup h4 {
     margin-bottom: 5px;
 }
-.popup-content img { /* Image inside the popup */
+.conteudo-popup img { /* Image inside the popup */
     max-width: 120px;
     height: auto;
     border-radius: 4px;
     margin-bottom: 5px;
 }
-.popup-content p {
+.conteudo-popup p {
     font-size: 0.9em;
     margin-bottom: 5px;
 }
-.popup-content small {
+.conteudo-popup small {
     font-size: 0.8em;
     color: #555;
 }
 
 /* Styling for the content INSIDE THE INFOBOX (bottom of screen) */
-.info-box-content {
+.caixa-info-content {
     padding: 10px;
 }
-.info-box-content h4 {
+.caixa-info-content h4 {
     margin-top: 0;
 }
-.info-box-content img { /* Image inside the info-box */
+.caixa-info-content img { /* Image inside the info-box */
     max-width: 100px;
     height: auto;
     border-radius: 4px;
