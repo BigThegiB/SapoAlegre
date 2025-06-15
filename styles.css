@@ -2,31 +2,101 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-body {
+    list-style: none; 
     font-family: "Montserrat", sans-serif;
 }
-ul, ol {
-    list-style: none;
-}
 
-.body{
-    background-color: #f8f9fa;
-    color: #212529;
+body {
+    background-color: rgb(227, 235, 225);
+    color: #333;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
-.header{
-    background-color: #343a40;
-    color: #343a40;
-    padding: 20px 0;
+header {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 70px;
+    background-color: rgb(170, 194, 164);
+    color: #fff;
+    padding: 20px 50px;
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    z-index: 3;
 }
 
-.container{
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+.nome{ 
+    font-family: "Orbitron", sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: rgb(122, 152, 113);
+    cursor: pointer;
+}
+.nome:hover {
+    color: rgb(110, 148, 104);
+    transition: color 0.3s ease-in-out;
 }
 
+header nav ul {
+    display: flex;
+    gap: 40px;
+}
+
+header nav ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 5px 0px;
+}
+
+header nav ul li::after {
+    content: '';
+    position: absolute;
+    width: 0px;
+    height: 4px;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(141, 174, 134);
+    border-radius: 20px;
+    transition: width 0.3s ease-in-out;
+}
+
+header nav ul li:hover::after {
+    width: 101%;
+}
+
+
+.container {
+    flex-direction: column;
+}
+
+.content {
+    inset: 0;
+    margin: 60px;
+    padding: 100px 20px 20px; /* Adjusted for fixed header */
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.subtitle {
+    font-family: "Orbitron", sans-serif;
+    color: rgb(122, 152, 113);
+    margin-bottom: 20px;
+}
+
+.text {
+    text-align: justify;
+    width: 60%;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #268242;
+    margin-bottom: 20px;
+}
+
+.content img {
+    width: 30%;
+    height: auto;
+    border-radius: 10px;
+}
