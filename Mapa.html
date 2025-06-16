@@ -14,6 +14,9 @@
         rel="stylesheet">
         <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="stylesMapa.css">
+    <!-- Pro botão de recentralizar o mapa, fonte: https://github.com/drustack/Leaflet.ResetView -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@drustack/leaflet.resetview/dist/L.Control.ResetView.min.css"> 
+    <script src="https://cdn.jsdelivr.net/npm/@drustack/leaflet.resetview/dist/L.Control.ResetView.min.js"></script>
     <title>Sapo Alegre - Mapa Leaflet</title>
 </head>
 <body>
@@ -36,6 +39,10 @@
     </div>
     
     <div id="caixa-info">
+        <div id="infoClose">
+        <img src="img/x-lg.svg" alt="Fechar" style="width: 30px; height: 20px;">
+        </div>
+            
         <p>Informações sobre a região selecionada aparecerão aqui.</p>
     </div>
 
