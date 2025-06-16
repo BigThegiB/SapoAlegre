@@ -8,11 +8,11 @@
 }
 
 body {
+    background-image: url("./img/fundo.jpg");
     font-size: 16px;
     line-height: 1.6;
     overflow-x: hidden;
 }
-
 
 .container {
     flex-direction: column;
@@ -21,7 +21,7 @@ body {
 }
 
 .content {
-    padding: 70px 20px 20px; 
+    padding: 50px 20px 20px; 
     display: flex;
     flex-direction: row-reverse; /* This will place the image on the right */
     align-items: center; /* Vertically aligns flex items (image and text-box) */
@@ -43,7 +43,7 @@ body {
     width: 100%;
     font-size: 1rem;
     line-height: 1.8;
-    color: #1b5e2f;
+    color: rgb(22, 77, 38);
     margin-bottom: 20px;
 }
 
@@ -52,14 +52,47 @@ body {
     padding: 20px; 
     background-image: url("./img/fundotext.jpg");
     border-radius: 20px;
+    box-shadow: rgba(5, 40, 4, 0.15) 0px 15px 25px, rgba(10, 47, 18, 0.05) 0px 5px 10px;
 }
 
 .content img {
-    box-shadow: rgba(5, 132, 3, 0.15) 0px 15px 25px, rgba(3, 110, 28, 0.05) 0px 5px 10px;
+    box-shadow: rgba(5, 40, 4, 0.15) 0px 15px 25px, rgba(10, 47, 18, 0.05) 0px 5px 10px;
     width: 27%; 
     border-radius: 15px;
     object-fit: cover; 
     align-self: center; 
 }
+
+.intagram-box {
+    color: rgb(27, 94, 47);
+    margin: 5px auto; /* Added top/bottom margin for spacing, auto for horizontal centering */
+    font-size: 20px;
+    width: fit-content; /* Adjusts width to content, good for centering the box itself */
+    padding: 15px 20px; /* Adjusted padding */
+    background-color: rgb(213, 228, 206);
+    border-radius: 20px;
+    box-shadow: rgba(5, 40, 4, 0.15) 0px 15px 25px, rgba(10, 47, 18, 0.05) 0px 5px 10px;
+    display: flex; /* Make the box itself a flex container to center the 'a' tag */
+    justify-content: center; /* Center the 'a' tag within the box */
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center; /* Alinha verticalmente ícone e texto */
+    gap: 10px; /* Espaço entre ícone e texto (ajustável) */ 
+}
+
+a.instagram-link { /* Create a more specific selector for the Instagram link */
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center; /* Alinha verticalmente ícone e texto */
+    justify-content: center; /* Horizontally center icon and text within the 'a' tag */
+    gap: 10px; /* Espaço entre ícone e texto (ajustável) */ 
+}
+
+
 
 
