@@ -13,69 +13,6 @@ body {
     overflow-x: hidden;
 }
 
-header {
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 70px;
-    background-color: rgb(170, 194, 164);
-    color: #fff;
-    padding: 20px 50px;
-    display: flex; 
-    align-items: center;
-    justify-content: space-between;
-    z-index: 3;
-}
-
-a {
-    text-decoration: none;
-}
-
-.nome{
-    font-family: "Orbitron", sans-serif;
-    font-size: 2rem;
-    font-weight: 900;
-    color: rgb(101, 133, 91);
-    cursor: pointer;
-}
-.nome:hover {
-    color: rgb(100, 128, 91);
-    transition: color 0.3s ease-in-out;
-}
-
-header{
-    box-shadow: rgba(28, 81, 30, 0.1) 0px 10px 15px -3px, rgba(26, 64, 25, 0.05) 0px 4px 6px -2px;
-}
-
-header nav ul {
-    display: flex;
-    gap: 40px;
-    
-}
-
-header nav ul li {
-    cursor: pointer;
-    position: relative;
-    padding: 5px 0px;
-    color: rgb(100, 128, 91);
-}
-
-header nav ul li::after {
-    content: '';
-    position: absolute;
-    width: 0px;
-    height: 4px;
-    bottom: 0;
-    left: 0;
-    background-color: rgb(141, 174, 134);
-    border-radius: 20px;
-    transition: width 0.3s ease-in-out;
-}
-
-header nav ul li:hover::after {
-    width: 101%;
-}
-
 
 .container {
     flex-direction: column;
@@ -83,15 +20,15 @@ header nav ul li:hover::after {
 
 .content {
     inset: 0;
-    margin: 60px;
-    padding: 80px 20px 20px; 
-    align-items: flex-start;
+    margin: 70px;
+    padding: 40px 20px 20px; 
+    align-items: relative;
     flex-direction: column;
 }
 
 .subtitle {
     font-family: "Orbitron", sans-serif;
-    color: rgb(122, 152, 113);
+    color: rgb(38, 70, 28);
     margin-left: 30px;
     margin-bottom: 20px;
 }
@@ -99,29 +36,26 @@ header nav ul li:hover::after {
 .text {
     text-indent: 2em;
     text-align: justify;
-    width: 60%;
+    width: 100%;
     font-size: 1rem;
     line-height: 1.8;
-    color: #268242;
+    color: #1b5e2f;
     margin-bottom: 20px;
 }
 
-.content img {
-    box-shadow: rgba(27, 72, 26, 0.15) 0px 15px 25px, rgba(13, 88, 30, 0.05) 0px 5px 10px;
-    width: 30%;
-    height: auto;
-    border-radius: 10px;
+.text-box{
+    position: absolute; 
+    width: 60%; 
+    margin: auto; 
+    padding: 20px; 
+    background-image: url("./img/fundotext.jpg");
+    border-radius: 20px;
 }
 
-.footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 50px;
-    background-color: rgb(170, 194, 164);
-    color: #fff;
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
+.content img {
+    box-shadow: rgba(5, 132, 3, 0.15) 0px 15px 25px, rgba(3, 110, 28, 0.05) 0px 5px 10px;
+    width: 30%;
+    border-radius: 15px;
 }
+
+

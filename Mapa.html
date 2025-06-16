@@ -9,13 +9,27 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""></script>
-    <link rel="stylesheet" href="stylesMapa.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap"
+        rel="stylesheet">
+        <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="stylesmapa.css">
     <title>Sapo Alegre - Mapa Leaflet</title>
 </head>
 <body>
 
-    <header id="app-header">
-        <h1>Mapa Interativo de Sapos</h1>
+    <header class="header">
+        <a href="index.html" outline="none">
+            <div id="home" class="nome"><img src="img/sapo_verde.png" weidth="30" height="30">Home</div>
+        </a>
+        <nav>
+            <ul>
+                <li id="btnMapa">Mapa</li>
+                <li id="btnCatalogo">Catálogo</li>
+                <li id="btnSaibaMais">Saiba mais</li>
+                <li id="btnRecursos">Recursos</li>
+            </ul>
+        </nav>
     </header>
     <div id="container-mapa">
         <div id="Mapa"></div>
@@ -27,6 +41,7 @@
 
     <button id="btn-voltar" style="display: none;">Voltar</button>
 
-    <script src="Mapa.js"></script>
+    <script src="mapa.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>

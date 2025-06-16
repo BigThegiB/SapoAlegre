@@ -2,6 +2,7 @@ const homeButton = document.getElementById('home');
 const catalogoButton = document.getElementById('btnCatalogo'); 
 const saibaMaisButton = document.getElementById('btnSaibaMais');
 const recursosButton = document.getElementById('btnRecursos');
+const mapaButton = document.getElementById('btnMapa');
 
 homeButton.addEventListener('click', () => {
     window.location.href = 'index.html';
@@ -18,3 +19,7 @@ saibaMaisButton.addEventListener('click', () => {
 recursosButton.addEventListener('click', () => {
     window.location.href = 'recursos.html';
 }); 
+
+mapaButton.addEventListener('click', () => {
+    window.location.href = 'mapa.html';
+});
