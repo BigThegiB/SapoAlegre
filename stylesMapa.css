@@ -40,17 +40,16 @@ body {
     left: 20px;
     z-index: 8; /* Deixa ele na frente de tudo B) */
     padding: 10px 15px;
-    background-color: rgb(83, 150, 73); /* Red */
+    background-color: rgb(83, 150, 73); /* Green */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 #btn-voltar:hover {
-    background-color: rgb(74, 135, 65); /* Darker red on hover */
+    background-color: rgb(74, 135, 65); /* Darker green on hover */
 }
 
 /* Styles for custom divIcon markers (THE ACTUAL MARKER ON THE MAP) */
