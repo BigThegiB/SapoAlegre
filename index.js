@@ -23,3 +23,5 @@ recursosButton.addEventListener('click', () => {
 mapaButton.addEventListener('click', () => {
     window.location.href = 'mapa.html';
 });
+
+

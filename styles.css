@@ -8,7 +8,12 @@
 }
 
 body {
-    background-image: url("./img/fundo.jpg");
+    background-image: url("./img/fundo.jpg"); 
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-size: cover;       /* Scale the image to cover the entire body */
+    background-position: center center; /* Center the image */
+    background-attachment: fixed; /* Make the background fixed during scroll */
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
     font-size: 16px;
     line-height: 1.6;
     overflow-x: hidden;
@@ -32,7 +37,7 @@ body {
 
 .subtitle {
     font-family: "Orbitron", sans-serif;
-    color: rgb(38, 70, 28);
+    color: rgb(163, 181, 153);
     margin-left: 30px;
     margin-bottom: 20px;
 }
@@ -43,15 +48,15 @@ body {
     width: 100%;
     font-size: 1rem;
     line-height: 1.8;
-    color: rgb(22, 77, 38);
+    color: rgb(175, 193, 165);
     margin-bottom: 20px;
 }
 
 .text-box{
     width: 55%; 
     padding: 20px; 
-    background-image: url("./img/fundotext.jpg");
-    border-radius: 20px;
+    background-color: rgba(19, 34, 21, 0.484);
+    border-radius: 10px;
     box-shadow: rgba(5, 40, 4, 0.15) 0px 15px 25px, rgba(10, 47, 18, 0.05) 0px 5px 10px;
 }
 
@@ -64,12 +69,12 @@ body {
 }
 
 .intagram-box {
-    color: rgb(27, 94, 47);
+    color: rgb(151, 183, 160);
     margin: 5px auto; /* Added top/bottom margin for spacing, auto for horizontal centering */
     font-size: 20px;
     width: fit-content; /* Adjusts width to content, good for centering the box itself */
     padding: 15px 20px; /* Adjusted padding */
-    background-color: rgb(213, 228, 206);
+    background-color:rgba(19, 34, 21, 0.484);
     border-radius: 20px;
     box-shadow: rgba(5, 40, 4, 0.15) 0px 15px 25px, rgba(10, 47, 18, 0.05) 0px 5px 10px;
     display: flex; /* Make the box itself a flex container to center the 'a' tag */

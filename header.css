@@ -2,11 +2,11 @@
     font-family: "Orbitron", sans-serif;
     font-size: 2rem;
     font-weight: 900;
-    color: rgb(101, 133, 91);
+    color: rgb(114, 134, 108);
     cursor: pointer;
 }
 .nome:hover {
-    color: rgb(100, 128, 91);
+    color: rgb(100, 118, 94);
     transition: color 0.3s ease-in-out;
 }
 
@@ -16,8 +16,8 @@ header{
     top: 0;
     width: 100vw;
     height: 70px;
-    background-image: url("./img/fundotext.jpg");
-    color: #fff;
+    background-color: rgb(46, 60, 40);
+    /*background-image: url("./img/fundotext.jpg");*/
     padding: 20px 50px;
     display: flex; 
     align-items: center;
@@ -38,7 +38,8 @@ header nav ul li {
     cursor: pointer;
     position: relative;
     padding: 5px 0px;
-    color: rgb(100, 128, 91);
+    color: rgb(100, 118, 94);
+    font-size: 110%;
 }
 
 header nav ul li::after {
@@ -48,13 +49,13 @@ header nav ul li::after {
     height: 4px;
     bottom: 0;
     left: 0;
-    background-color: rgb(141, 174, 134);
+    background-color: rgb(100, 118, 94);
     border-radius: 20px;
     transition: width 0.3s ease-in-out;
 }
 
 header nav ul li:hover::after {
-    width: 101%;
+    width: 105%;
 }
 
 a {
@@ -66,7 +67,7 @@ a {
     bottom: 0;
     width: 100%;
     height: 50px;
-    background-color: rgb(170, 194, 164);
+    background-color: rgba(109, 130, 104, 0.462);
     color: #fff;
     display: flex; 
     align-items: center;
