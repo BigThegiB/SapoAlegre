@@ -11,7 +11,7 @@
 }
 
 header{
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif; 
     position: relative;
     top: 0;
     width: 100vw;
@@ -24,6 +24,7 @@ header{
     justify-content: space-between;
     z-index: 3;
     box-shadow: rgba(28, 81, 30, 0.1) 0px 10px 15px -3px, rgba(26, 64, 25, 0.05) 0px 4px 6px -2px;
+    box-sizing: border-box;
 }
 
 header nav ul {
