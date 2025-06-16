@@ -1,14 +1,28 @@
 // Mapa.js - Leaflet Implementation with Markers
 
 document.addEventListener('DOMContentLoaded', () => {
-    const map = L.map('Mapa').setView([0, 0], 2); // Initial view: center of the world, zoom level 2
+    const map = L.map('Mapa',{
+        'worldCopyJump': true
+    })  
+        
     const infoBox = document.getElementById('caixa-info');
-    const backButton = document.getElementById('btn-voltar');
+    map.setView([0, 0], 2)
     const originalView = { lat: 0, lng: 0, zoom: 2 };
+    
+
 
     // Add a tile layer (e.g., OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+
+
+    L.control.resetView({
+    position: "topleft",
+    title: "Reiniciar visão",
+    latlng: L.latLng([0, 0]),
+    zoom: 2,
     }).addTo(map);
 
     async function carregarDadosSapo(index) {
@@ -128,8 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 caixonacontent = await carregarDadosSapo(markerData.Index);
                 markerData.caixona = caixonacontent;
                     infoBox.innerHTML =`
-                    
-   
+                    <div id="infoClose">
+                        <img src="img/x-lg.svg" alt="Fechar" style="width: 30px; height: 20px;">
+                    </div>
                     <div class="caixa-info-content">
                         <h4>${markerData.nomeSapo}</h4>
                         <img class="imagem-caixona" src="${markerData.imagePath}" alt="${markerData.nomeSapo}">
@@ -141,40 +156,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
                infoBox.style.display = 'block';  
+               infoBox.scrollTo(0,0);
+               var infoClose = document.getElementById('infoClose');
+                infoClose.addEventListener('click', () => { 
+                infoBox.style.display = 'none';
+                }); 
             });
         });
     });
 
-    // Show/hide back button based on map view changes
-    map.on('zoomend moveend', () => {
-        const currentZoom = map.getZoom();
-        const currentCenter = map.getCenter();
-        // A small tolerance for floating point comparisons of center
-        const latDiff = Math.abs(currentCenter.lat - originalView.lat);
-        const lngDiff = Math.abs(currentCenter.lng - originalView.lng);
 
-        if (currentZoom !== originalView.zoom || latDiff > 0.0001 || lngDiff > 0.0001) {
-            backButton.style.display = 'block';
-        } else {
-            backButton.style.display = 'none';
-        }
-         
-    });
 
-    // Back button functionality
-    backButton.addEventListener('click', () => { 
-        map.setView([originalView.lat, originalView.lng], originalView.zoom);
-        infoBox.innerHTML = '<p>Informações sobre a região selecionada aparecerão aqui.</p>';
-        // The zoomend/moveend event will hide the button
-        infoBox.style.display = 'none';
-
-    });
-
-    // Ensure button is hidden on initial load if view matches original
-    if (map.getZoom() === originalView.zoom && map.getCenter().lat === originalView.lat && map.getCenter().lng === originalView.lng) {
-        backButton.style.display = 'none';
-
-    }
 });
 
 
