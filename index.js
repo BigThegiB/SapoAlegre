@@ -16,10 +16,6 @@ saibaMaisButton.addEventListener('click', () => {
     window.location.href = 'saibamais.html';
 });
 
-recursosButton.addEventListener('click', () => {
-    window.location.href = 'recursos.html';
-});
-
 mapaButton.addEventListener('click', () => {
     window.location.href = 'mapa.html';
 });
