@@ -1,52 +1,51 @@
 .catalogo-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Two equal columns */
-    gap: 25px; /* Increased gap slightly */
-    padding: 25px; /* Increased padding slightly */
-    width: 95%; /* Wider catalog */
-    max-width: 1400px; /* Max width for larger screens */
-    margin: 30px auto; /* Increased top/bottom margin and centered */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 25px;
+    width: 95%;
+    max-width: 1400px;
+    margin: 30px auto;
 }
 
 .sapo-card {
-    background-color: rgba(164, 182, 164, 0.596); /* Slightly off-white, more opaque */
-    border-radius: 10px; /* Slightly more rounded corners */
-    padding: 25px; /* Increased padding */
+    background-color: rgba(164, 182, 164, 0.596);
+    border-radius: 10px;
+    padding: 25px;
     text-align: left;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
     transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
     display: flex;
     flex-direction: column;
-    color: #2e4813; /* Darker, more saturated text color */
-    min-height: 280px; /* Adjusted min-height */
-    justify-content: flex-start; /* Align content to the top */
+    color: #2e4813;
+    min-height: 280px;
+    justify-content: flex-start;
 }
 
 .sapo-card h4 {
     margin-top: 0;
-    margin-bottom: 18px; 
-    font-size: 1.6em; 
-    color: #0d430f; /* Teal color for titles */
+    margin-bottom: 18px;
+    font-size: 1.6em;
+    color: #0d430f;
     text-align: center;
     font-family: "Orbitron", sans-serif;
 }
 
 .sapo-card p {
-    font-size: 0.95em; /* Slightly larger paragraph text */
-    line-height: 1.5;
+    font-size: 0.95em;
     margin-bottom: 10px;
-    color: #123610; 
-    width: 100%; 
+    color: #123610;
+    width: 100%;
 }
 
 .sapo-card p strong {
-    color: #283f17; 
+    color: #283f17;
 }
 
 .sapo-card summary {
     cursor: pointer;
     font-weight: bold;
-    color: #144219; 
+    color: #144219;
     margin-bottom: 6px;
     padding: 5px;
     border-radius: 4px;
@@ -58,8 +57,8 @@
 }
 
 .text-box-catalogo {
-    width: 55%; 
-    padding: 20px; 
+    width: 55%;
+    padding: 20px;
     background-color: rgba(19, 34, 21, 0.484);
     border-radius: 10px;
     box-shadow: rgba(5, 40, 4, 0.15) 0px 15px 25px, rgba(10, 47, 18, 0.05) 0px 5px 10px;

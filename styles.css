@@ -1,19 +1,19 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    list-style: none; 
+    list-style: none;
     font-family: "Montserrat", sans-serif;
     z-index: 1;
 }
 
 body {
-    background-image: url("./img/fundo.jpg"); 
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    background-size: cover;       /* Scale the image to cover the entire body */
-    background-position: center center; /* Center the image */
-    background-attachment: fixed; /* Make the background fixed during scroll */
-    min-height: 100vh; /* Ensure body takes at least full viewport height */
+    background-image: url("./img/fundo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    min-height: 100vh;
     font-size: 16px;
     line-height: 1.6;
     overflow-x: hidden;
@@ -21,18 +21,18 @@ body {
 
 .container {
     flex-direction: column;
-    display: flex; 
+    display: flex;
     align-items: center;
 }
 
 .content {
-    padding: 50px 20px 20px; 
+    padding: 50px 20px 20px;
     display: flex;
-    flex-direction: row-reverse; /* This will place the image on the right */
-    align-items: center; /* Vertically aligns flex items (image and text-box) */
-    justify-content: center; 
-    gap: 40px; 
-    max-width: 2200px; 
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 2200px;
 }
 
 .subtitle {
@@ -52,9 +52,9 @@ body {
     margin-bottom: 20px;
 }
 
-.text-box{
-    width: 55%; 
-    padding: 20px; 
+.text-box {
+    width: 55%;
+    padding: 20px;
     background-color: rgba(19, 34, 21, 0.484);
     border-radius: 10px;
     box-shadow: rgba(5, 40, 4, 0.15) 0px 15px 25px, rgba(10, 47, 18, 0.05) 0px 5px 10px;
@@ -62,23 +62,23 @@ body {
 
 .content img {
     box-shadow: rgba(5, 40, 4, 0.15) 0px 15px 25px, rgba(10, 47, 18, 0.05) 0px 5px 10px;
-    width: 27%; 
+    width: 27%;
     border-radius: 15px;
-    object-fit: cover; 
-    align-self: center; 
+    object-fit: cover;
+    align-self: center;
 }
 
 .instagram-box {
     color: rgb(151, 183, 160);
-    margin: 5px auto; /* Added top/bottom margin for spacing, auto for horizontal centering */
+    margin: 5px auto;
     font-size: 20px;
-    width: fit-content; /* Adjusts width to content, good for centering the box itself */
-    padding: 15px 20px; /* Adjusted padding */
-    background-color:rgba(19, 34, 21, 0.484);
+    width: fit-content;
+    padding: 15px 20px;
+    background-color: rgba(19, 34, 21, 0.484);
     border-radius: 20px;
     box-shadow: rgba(5, 40, 4, 0.15) 0px 15px 25px, rgba(10, 47, 18, 0.05) 0px 5px 10px;
-    display: flex; /* Make the box itself a flex container to center the 'a' tag */
-    justify-content: center; /* Center the 'a' tag within the box */
+    display: flex;
+    justify-content: center;
 }
 
 .instagram-box:hover {
@@ -89,19 +89,15 @@ a {
     color: inherit;
     text-decoration: none;
     display: flex;
-    align-items: center; /* Alinha verticalmente ícone e texto */
-    gap: 10px; /* Espaço entre ícone e texto (ajustável) */ 
+    align-items: center;
+    gap: 10px;
 }
 
-a.instagram-link { /* Create a more specific selector for the Instagram link */
+a.instagram-link {
     color: inherit;
     text-decoration: none;
     display: flex;
-    align-items: center; /* Alinha verticalmente ícone e texto */
-    justify-content: center; /* Horizontally center icon and text within the 'a' tag */
-    gap: 10px; /* Espaço entre ícone e texto (ajustável) */ 
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
-
-
-
-
