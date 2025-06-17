@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 throw new Error(`Erro HTTP: ${response.status} ao buscar ${fileName}`);
             }
             const text = await response.text();
-            return text.trim().split('\n').map(line => line.trim()); // Trim each line
+            return text.trim().split('\n').map(line => line.trim()); 
         } catch (error) {
             console.error(`Falha ao buscar o arquivo ${fileName}:`, error);
             return [];
