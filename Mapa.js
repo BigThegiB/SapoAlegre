@@ -1,14 +1,14 @@
 // Mapa.js - Leaflet Implementation with Markers
 
 document.addEventListener('DOMContentLoaded', () => {
-    const map = L.map('Mapa',{
+    const map = L.map('Mapa', {
         'worldCopyJump': true
-    })  
-        
+    })
+
     const infoBox = document.getElementById('caixa-info');
     map.setView([0, 0], 2)
     const originalView = { lat: 0, lng: 0, zoom: 2 };
-    
+
 
 
     // Add a tile layer (e.g., OpenStreetMap)
@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     L.control.resetView({
-    position: "topleft",
-    title: "Reiniciar visão",
-    latlng: L.latLng([0, 0]),
-    zoom: 2,
+        position: "topleft",
+        title: "Reiniciar visão",
+        latlng: L.latLng([0, 0]),
+        zoom: 2,
     }).addTo(map);
 
     async function carregarDadosSapo(index) {
@@ -31,20 +31,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let resultado = '';
 
-        for (let i = 0; i < arquivos.length; i++) {    
+        for (let i = 0; i < arquivos.length; i++) {
             const resposta = await fetch(arquivos[i]);
             const texto = await resposta.text();
             const linhas = texto.trim().split('\n');
 
             if (index >= 0 && index < linhas.length) {
-            resultado += `<strong>${categorias[i]}:</strong> ${linhas[index]}<br><br>`;
+                resultado += `<strong>${categorias[i]}:</strong> ${linhas[index]}<br><br>`;
             } else {
-            resultado += `<strong>${categorias[i]}:</strong> (sem informação)<br><br>`;
+                resultado += `<strong>${categorias[i]}:</strong> (sem informação)<br><br>`;
             }
         }
-            console.log(resultado)
-            return resultado
-        }
+        console.log(resultado)
+        return resultado
+    }
 
 
     // Define continent data with specific marker locations, nomeSapos, and image paths
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             markers: [
                 { lat: -28.3944444, lng: 153.0672222, nomeSapo: "Rã-de-bolso", imagePath: "img/Rã-de-bolso.png", caixinha: "Common in Australia.", caixona: "", Index: 20 },
                 { lat: -36.448, lng: 148.265, nomeSapo: "Rã-corroboree-do-sul", imagePath: "img/Rã-corroboree-do-sul.png", caixinha: "A critically endangered Australian frog.", caixona: "", Index: 21 },
-                { lat: -8.956345179581513, lng: 148.2053861271226, nomeSapo: "Rã-arbórea-das-montanhas-de-Lamington", imagePath: "img/Rã-arbórea-das-montanhas-de-Lamington.png", caixinha: "Adapted to arid parts of Oceania.", caixona: "", Index: 22  }
+                { lat: -8.956345179581513, lng: 148.2053861271226, nomeSapo: "Rã-arbórea-das-montanhas-de-Lamington", imagePath: "img/Rã-arbórea-das-montanhas-de-Lamington.png", caixinha: "Adapted to arid parts of Oceania.", caixona: "", Index: 22 }
             ]
         }
     ];
@@ -138,10 +138,10 @@ document.addEventListener('DOMContentLoaded', () => {
             marker.bindPopup(popupContent);
 
             // Evento para mostrar informações na caixa de informações ao clicar no marcador
-            marker.on('click', async() => {
+            marker.on('click', async () => {
                 caixonacontent = await carregarDadosSapo(markerData.Index);
                 markerData.caixona = caixonacontent;
-                    infoBox.innerHTML =`
+                infoBox.innerHTML = `
                     <div id="infoClose">
                         <img src="img/x-lg.svg" alt="Fechar" style="width: 30px; height: 20px;">
                     </div>
@@ -155,18 +155,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 `;
-               infoBox.style.display = 'block';  
-               infoBox.scrollTo(0,0);
-               var infoClose = document.getElementById('infoClose');
-                infoClose.addEventListener('click', () => { 
-                infoBox.style.display = 'none';
-                }); 
+                infoBox.style.display = 'block';
+                infoBox.scrollTo(0, 0);
+                var infoClose = document.getElementById('infoClose');
+                infoClose.addEventListener('click', () => {
+                    infoBox.style.display = 'none';
+                });
             });
         });
     });
-
-
-
 });
 
 

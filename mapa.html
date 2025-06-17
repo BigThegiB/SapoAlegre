@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-        crossorigin=""/>
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-        crossorigin=""></script>
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="stylesMapa.css">
     <!-- Pro botão de recentralizar o mapa, fonte: https://github.com/drustack/Leaflet.ResetView -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@drustack/leaflet.resetview/dist/L.Control.ResetView.min.css"> 
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@drustack/leaflet.resetview/dist/L.Control.ResetView.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@drustack/leaflet.resetview/dist/L.Control.ResetView.min.js"></script>
     <title>Sapo Alegre - Mapa Leaflet</title>
 </head>
+
 <body>
     <header class="header">
         <a href="index.html" outline="none">
@@ -36,12 +37,12 @@
     <div id="container-mapa">
         <div id="Mapa"></div>
     </div>
-    
+
     <div id="caixa-info">
         <div id="infoClose">
-        <img src="img/x-lg.svg" alt="Fechar" style="width: 30px; height: 20px;">
+            <img src="img/x-lg.svg" alt="Fechar" style="width: 30px; height: 20px;">
         </div>
-            
+
         <p>Informações sobre a região selecionada aparecerão aqui.</p>
     </div>
 
@@ -50,4 +51,5 @@
     <script src="mapa.js"></script>
     <script src="./index.js"></script>
 </body>
+
 </html>

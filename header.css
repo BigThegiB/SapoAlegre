@@ -1,17 +1,18 @@
-.nome{
+.nome {
     font-family: "Orbitron", sans-serif;
     font-size: 2rem;
     font-weight: 900;
     color: rgb(114, 134, 108);
     cursor: pointer;
 }
+
 .nome:hover {
     color: rgb(100, 118, 94);
     transition: color 0.3s ease-in-out;
 }
 
-header{
-    font-family: "Montserrat", sans-serif; 
+header {
+    font-family: "Montserrat", sans-serif;
     position: relative;
     top: 0;
     width: 100vw;
@@ -19,7 +20,7 @@ header{
     background-color: rgb(46, 60, 40);
     /*background-image: url("./img/fundotext.jpg");*/
     padding: 20px 50px;
-    display: flex; 
+    display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 3;
@@ -31,7 +32,7 @@ header nav ul {
     list-style: none;
     display: flex;
     gap: 40px;
-    
+
 }
 
 header nav ul li {
@@ -69,7 +70,7 @@ a {
     height: 50px;
     background-color: rgba(109, 130, 104, 0.462);
     color: #fff;
-    display: flex; 
+    display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1rem;

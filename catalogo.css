@@ -1,0 +1,67 @@
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Two equal columns */
+    gap: 25px; /* Increased gap slightly */
+    padding: 25px; /* Increased padding slightly */
+    width: 95%; /* Wider catalog */
+    max-width: 1400px; /* Max width for larger screens */
+    margin: 30px auto; /* Increased top/bottom margin and centered */
+}
+
+.sapo-card {
+    background-color: rgba(164, 182, 164, 0.596); /* Slightly off-white, more opaque */
+    border-radius: 10px; /* Slightly more rounded corners */
+    padding: 25px; /* Increased padding */
+    text-align: left;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+    transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    color: #2e4813; /* Darker, more saturated text color */
+    min-height: 280px; /* Adjusted min-height */
+    justify-content: flex-start; /* Align content to the top */
+}
+
+.sapo-card h4 {
+    margin-top: 0;
+    margin-bottom: 18px; 
+    font-size: 1.6em; 
+    color: #0d430f; /* Teal color for titles */
+    text-align: center;
+    font-family: "Orbitron", sans-serif;
+}
+
+.sapo-card p {
+    font-size: 0.95em; /* Slightly larger paragraph text */
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: #123610; 
+    width: 100%; 
+}
+
+.sapo-card p strong {
+    color: #283f17; 
+}
+
+.sapo-card summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #144219; 
+    margin-bottom: 6px;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: rgba(186, 210, 180, 0.162);
+}
+
+.sapo-card summary:hover {
+    background-color: rgba(49, 80, 28, 0.404);
+}
+
+.text-box-catalogo {
+    width: 55%; 
+    padding: 20px; 
+    background-color: rgba(19, 34, 21, 0.484);
+    border-radius: 10px;
+    box-shadow: rgba(5, 40, 4, 0.15) 0px 15px 25px, rgba(10, 47, 18, 0.05) 0px 5px 10px;
+    margin-top: 40px;
+}

@@ -68,7 +68,7 @@ body {
     align-self: center; 
 }
 
-.intagram-box {
+.instagram-box {
     color: rgb(151, 183, 160);
     margin: 5px auto; /* Added top/bottom margin for spacing, auto for horizontal centering */
     font-size: 20px;
@@ -79,6 +79,10 @@ body {
     box-shadow: rgba(5, 40, 4, 0.15) 0px 15px 25px, rgba(10, 47, 18, 0.05) 0px 5px 10px;
     display: flex; /* Make the box itself a flex container to center the 'a' tag */
     justify-content: center; /* Center the 'a' tag within the box */
+}
+
+.instagram-box:hover {
+    transform: translateY(-6px);
 }
 
 a {

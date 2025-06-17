@@ -11,6 +11,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="catalogo.css"> 
 </head>
 
 <body>
@@ -27,19 +28,23 @@
             </ul>
         </nav>
     </header>
+
     <div class="container">
-        <div class="content">
-            <div class="text-box">
+        <div class="text-box-catalogo">
             <h1 class="subtitle">Catálogo de Sapos</h1>
-            <p class="text">Este catálogo apresenta uma seleção de sapos, rãs e pererecas ameaçados de extinção, destacando a importância de cada espécie para o ecossistema e os desafios que enfrentam. Através deste catálogo, buscamos aumentar a conscientização sobre a necessidade urgente de proteger esses anfíbios e seus habitats.</p>
-            </div>
+            <p class="text">Este catálogo apresenta uma seleção de sapos, rãs e pererecas ameaçados de extinção,
+                destacando a importância de cada espécie para o ecossistema e os desafios que enfrentam. Através
+                deste catálogo, buscamos aumentar a conscientização sobre a necessidade urgente de proteger esses
+                anfíbios e seus habitats.</p>
+        </div>
+
+        <div class="content">
+            <div id="catalogo-container" class="catalogo-grid"></div> <!-- Container for frog cards -->
         </div>
     </div>
 
-    <footer class="footer">
-        <p><s>&copy;</s> 2025 SapoAlegre. Todos os direitos não reservados.</p>
-
 </body>
 <script src="./index.js"></script>
-
+<script src="./catalogo.js"></script>
+    
 </html>
